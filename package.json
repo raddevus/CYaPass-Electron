@@ -1,0 +1,26 @@
+{
+  "name": "C'YaPass",
+  "version": "1.0.1",
+  "description": "Never type a password again.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/raddevus/CYaPass-Electron-Prototype",
+  "keywords": [
+    "C'YaPass",
+    "password",
+    "never",
+    "type",
+    "again"
+  ],
+  "author": "roger deutsch",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^6.0.9"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1"
+  }
+}

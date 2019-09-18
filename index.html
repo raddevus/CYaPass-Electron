@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="sha256.js"></script>    
+  </head>
+  <body>
+    We are using Node.js <span id="node-version"></span>,
+    Chromium <span id="chrome-version"></span>,
+    and Electron <span id="electron-version"></span>.
+    <body>
+
+ <div class="row" style="background-color:WhiteSmoke;">	
+   <div class="col-sm-6" >
+     <h3 class="cyaHeader">1. Select (or Add) Site/Key</h3>
+     <select id="SiteListBox" size="10"></select>
+     <button type="button" class="btn btn-sm btn-outline-primary" onclick="addButtonClick()">Add</button>
+     <button type="button" class="btn btn-sm btn-outline-primary" onclick="editButtonClick()">Edit</button>
+     <button type="button" class="btn btn-sm btn-outline-primary" onclick="deleteButtonClick()">Delete</button>
+     
+     <form class="form-inline">
+       <div class="input-group">
+         <label class="input-group-addon"><input id="addUppercaseCheckBox" type="checkbox" value=""><strong> Add UpperCase</strong></label>
+         <label id="noshow" class="form-control" ></label>
+       </div>
+       <div class="input-group">
+         <label class="input-group-addon"><input id="addSpecialCharsCheckBox" type="checkbox" value=""><strong> Add Special Chars</strong></label>
+         <input class="form-control" id="specialChars" placeholder="special chars">
+       </div>
+       <div class="input-group">
+         <label class="input-group-addon"><input id="maxLengthCheckBox" type="checkbox" value=""><strong> Max Length</strong></label>
+         <input type = "number" max="64" min="0" class="form-control" id="maxLength" value="32">
+       </div>
+     </form>
+   </div>
+   <div class="col-sm-6" >
+   <h3 class="cyaHeader">2. Draw a pattern</h3>
+   <canvas id="mainGrid">You're browser does not support HTML5.</canvas>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <input type="checkbox" id="hidePatternCheckBox">
+          </div>
+          <span class="form-control input-type-text" ><strong>Hide Pattern</strong></span>
+        </div>
+        
+      <button type="button" class="btn btn-sm btn-outline-primary" onclick="clearButtonClick()">Clear</button>
+    </div>
+     <div class="form-group">
+       <textarea class="form-control" rows="3" id="passwordText" placeholder="password"></textarea>
+     </div>
+   </div>
+ </div>
+</div>
+
+<script src="sha256.js"></script>
+<div class="modal fade" id="AddSiteKeyModal" tabindex="-1" role="dialog" aria-labelledby="AddSiteKeyLabel">
+ <div class="modal-dialog" role="document">
+   <div class="modal-content">
+     <div class="modal-title">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+       <h4 class="modal-title" id="AddSiteKeyLabel">Add New Site/Key</h4>
+     </div>
+     <div class="modal-body">
+       <label for="SiteKeyItem">Site/Key</label> <span id="siteKeyErrMsg"></span>
+   <input class="form-control" type="text" id="SiteKeyItem" autofocus placeholder="Site/Key">
+     <div class="form-check">
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <input type="checkbox" id="addUppercaseCheckboxDlg">
+              </div>
+            </div>
+            <span class="form-control input-type-text">add uppercase</span>
+          </div>
+          
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <input type="checkbox" id="addSpecialCharsCheckboxDlg">
+              </div>
+            </div>
+            <span class="form-control input-type-text" >add special char(s)</span>
+          </div>
+          
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <input type="checkbox" id="setMaxLengthCheckboxDlg" 
+                  value="32" >
+              </div>
+            </div>
+            <span class="form-control input-type-text" >set max length</span>
+            <input type="number" class="form-control input-type-text" id="maxLengthDlg" placeholder="max length"/>
+          </div>
+     </div>
+     
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-sm btn-outline-primary btn-submit" data-dismiss="modal">Cancel</button>
+       <button id="OKSiteKeyButton" type="button" class="btn btn-sm btn-primary">OK</button>
+     </div>
+   </div>
+ </div>
+</div>
+
+<div class="modal fade" id="DeleteSiteKeyModal" tabindex="-1" role="dialog" aria-labelledby="DeleteSiteKeyLabel">
+ <div class="modal-dialog" role="document">
+   <div class="modal-content">
+     <div class="modal-title">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+       <h4 class="modal-title" id="DeleteSiteKeyLabel">Confirm Deletion of Site/Key</h4>
+     </div>
+     <div class="modal-body">
+       <span id="siteKeyDelMsg"></span><span id="siteKeyDelValue"></span>
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-sm btn-outline-primary btn-submit" data-dismiss="modal">Cancel</button>
+       <button id="OKDeleteButton" type="button" class="btn btn-sm btn-primary">OK</button>
+     </div>
+   </div>
+ </div>
+</div>
+
+</body>
+    <!-- You can also require other files to run in this process -->
+    <script src="./renderer.js"></script>
+  </body>
+</html>
