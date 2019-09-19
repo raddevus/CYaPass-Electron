@@ -5,8 +5,12 @@ window.addEventListener('DOMContentLoaded', () => {
     const element = document.getElementById(selector)
     if (element) element.innerText = text
   } 
-  
+  const remote = require('electron').remote;
+  const app = remote.app;
+  replaceText(`app-path`,app.getPath('userData'));
+
   for (const type of ['chrome', 'node', 'electron']) {
     replaceText(`${type}-version`, process.versions[type])
   }
+  
 })
