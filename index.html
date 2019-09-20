@@ -12,7 +12,7 @@
     App-Path : <span id="app-path"></span>
     <body>
 
- <div class="row" style="background-color:WhiteSmoke;">	
+ <div id="formBody" class="row">
    <div class="col-sm-6" >
      <h3 class="cyaHeader">1. Select (or Add) Site/Key</h3>
      <select id="SiteListBox" size="10"></select>
@@ -65,9 +65,8 @@
      </div>
      <div class="modal-body">
        <label for="SiteKeyItem">Site/Key</label> <span id="siteKeyErrMsg"></span>
-   <input class="form-control" type="text" id="SiteKeyItem" autofocus placeholder="Site/Key">
-     <div class="form-check">
-
+        <input class="form-control" type="text" id="SiteKeyItem" autofocus placeholder="Site/Key">
+     <div class="form-check" id="addUpperCaseContainer">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
               <div class="input-group-text">

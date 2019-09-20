@@ -1,7 +1,10 @@
 @import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
-
+html{padding : 2px 20px 0px 10px;}
+html, #formBody { background-color:WhiteSmoke; padding-top: 5px;}
 #SiteListBox{width:100%;}
 #SiteListButtons{margin-left:20px;}
+#addUpperCaseContainer{padding-top : 15px;}
+.modal-title{padding: 5px 15px 0px 15px;}
 #siteKeyDelValue, #siteKeyErrMsg{color:red;}
 #noshow{visibility:hidden;}
 .cyaHeader{font-size:large;color:blue; margin-left:10px;}
