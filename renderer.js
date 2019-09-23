@@ -289,6 +289,7 @@ function addButtonClick(){
 function addOrEditSiteKey(){
 	if (isAddKey){
 		addSiteKey();
+		sortSiteKeys();
 	}
 	else
 	{
@@ -427,7 +428,6 @@ function deleteButtonClick(){
 		$("#siteKeyDelMsg").text("Click [OK] to delete the site/key: ");
 		$("#siteKeyDelValue").text(selectedItem);
 		$("#DeleteSiteKeyModal").modal('toggle');
-		//loadSiteKeyList();
 	}
 }
 
@@ -451,6 +451,7 @@ function deleteSiteKey(){
 	$("#DeleteSiteKeyModal").modal('hide');
 	$("#passwordText").val("");
 	siteListBoxChangeHandler();
+	sortSiteKeys();
 }
 
 //###############################################################################
@@ -552,6 +553,16 @@ function initApp(){
 	initSiteKeys();
 	$('#SiteListBox option:last').prop('selected', true);
 	siteListBoxChangeHandler();
+	sortSiteKeys();
+}
+
+function sortSiteKeys(){
+	// choose target dropdown
+	var select = $('select');
+	select.html(select.find('option').sort(function(x, y) {
+	  // to change to descending order switch "<" for ">"
+	  return $(x).text() > $(y).text() ? 1 : -1;
+	}));
 }
 
 function drawLine(p, p2, color, lineWidth, isUsingOffset){
