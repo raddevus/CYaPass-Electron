@@ -6,19 +6,15 @@
     <script src="sha256.js"></script>    
   </head>
   <body>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
-    App-Path : <span id="app-path"></span>
-    <body>
-
  <div id="formBody" class="row">
    <div class="col-sm-6" >
      <h3 class="cyaHeader">1. Select (or Add) Site/Key</h3>
      <select id="SiteListBox" size="10"></select>
-     <button type="button" class="btn btn-sm btn-outline-primary" onclick="addButtonClick()">Add</button>
-     <button type="button" class="btn btn-sm btn-outline-primary" onclick="editButtonClick()">Edit</button>
-     <button type="button" class="btn btn-sm btn-outline-primary" onclick="deleteButtonClick()">Delete</button>
+     <div class="topPad">
+      <button type="button" class="btn btn-sm btn-outline-primary" onclick="addButtonClick()">Add</button>
+      <button type="button" class="btn btn-sm btn-outline-primary" onclick="editButtonClick()">Edit</button>
+      <button type="button" class="btn btn-sm btn-outline-primary" onclick="deleteButtonClick()">Delete</button>
+     </div>
      
      <form class="form-inline">
        <div class="input-group">
@@ -38,7 +34,7 @@
    <div class="col-sm-6" >
    <h3 class="cyaHeader">2. Draw a pattern</h3>
    <canvas id="mainGrid">You're browser does not support HTML5.</canvas>
-    <div class="input-group mb-3">
+    <div class="input-group mb-3 topPad">
         <div class="input-group-prepend">
           <div class="input-group-text">
             <input type="checkbox" id="hidePatternCheckBox">
@@ -123,9 +119,13 @@
    </div>
  </div>
 </div>
-
+<div>
+    We are using Node.js <span id="node-version"></span>,
+    Chromium <span id="chrome-version"></span>,
+    and Electron <span id="electron-version"></span>.
+    <br/>App-Path : <span id="app-path"></span>
+</div>
 </body>
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
-  </body>
 </html>
