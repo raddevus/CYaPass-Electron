@@ -169,7 +169,9 @@ function generatePassword(){
 	}
 	
 	$("#passwordText").val(pwd);
+	$("#passwordText").select();
 	document.execCommand("copy");
+	$("#SiteListBox").focus();
 }
 
 function setMaxLength(){
