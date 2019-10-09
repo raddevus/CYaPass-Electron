@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/raddevus/CYaPass-Electron-Prototype",
+  "repository": "https://github.com/raddevus/CYaPass-Electron",
   "keywords": [
     "C'YaPass",
     "password",
