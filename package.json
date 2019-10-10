@@ -1,29 +1,66 @@
 {
-  "name": "C'YaPass",
-  "version": "1.0.2",
-  "description": "Never type a password again.",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron .",
-    "electron-toolkit": "electron ./node_modules/electron-toolkit"
-  },
-  "repository": "https://github.com/raddevus/CYaPass-Electron",
-  "keywords": [
-    "C'YaPass",
-    "password",
-    "never",
-    "type",
-    "again"
-  ],
-  "author": "roger deutsch",
-  "license": "CC0-1.0",
-  "devDependencies": {
-    "electron": "^6.0.9",
-    "electron-builder": "^21.2.0",
-    "electron-toolkit": "^1.0.24"
-  },
-  "dependencies": {
-    "bootstrap": "^4.3.1",
-    "jquery": "^3.4.1"
-  }
+    "name": "C'YaPass",
+    "version": "1.0.2",
+    "description": "Never type a password again.  \nNever memorize a password again.\nNever make up a password again.",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "electron-toolkit": "electron ./node_modules/electron-toolkit"
+    },
+    "repository": "https://github.com/raddevus/CYaPass-Electron",
+    "keywords": [
+        "C'YaPass",
+        "password",
+        "never",
+        "type",
+        "again"
+    ],
+    "author": "roger deutsch",
+    "license": "CC0-1.0",
+    "devDependencies": {
+        "electron": "^6.0.9",
+        "electron-builder": "^21.2.0",
+        "electron-toolkit": "^1.0.24"
+    },
+    "dependencies": {
+        "bootstrap": "^4.3.1",
+        "jquery": "^3.4.1"
+    },
+    "build": {
+        "appId": "com.cyapass.C'YaPass",
+        "copyright": "Copyright © 2019 roger deutsch",
+        "productName": "C'YaPass",
+        "electronVersion": "6.0.9",
+        "asar": true,
+        "directories": {
+            "app": "C:\\dev\\electron\\CYaPass-Electron",
+            "output": "dist"
+        },
+        "win": {
+            "target": [
+                {
+                    "target": "nsis",
+                    "arch": [
+                        "x64"
+                    ]
+                }
+            ]
+        },
+        "linux": {
+            "target": [
+                {
+                    "target": "AppImage",
+                    "arch": [
+                        "x64"
+                    ]
+                },
+                {
+                    "target": "debian package (deb)",
+                    "arch": [
+                        "x64"
+                    ]
+                }
+            ]
+        }
+    }
 }
