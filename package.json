@@ -1,7 +1,7 @@
 {
     "name": "C'YaPass",
-    "version": "1.0.2",
-    "description": "Never type a password again.  \nNever memorize a password again.\nNever make up a password again.",
+    "version": "1.0.3",
+    "description": "Draw your password!\nNever type a password again.\nNever memorize a password again.\nNever make up a password again.",
     "main": "main.js",
     "scripts": {
         "start": "electron .",
@@ -33,7 +33,7 @@
         "electronVersion": "6.0.9",
         "asar": true,
         "directories": {
-            "app": "C:\\dev\\electron\\CYaPass-Electron",
+            "app": "C:\\Dev\\electron\\CYaPass-Electron",
             "output": "dist"
         },
         "win": {
