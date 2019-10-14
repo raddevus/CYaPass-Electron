@@ -20,7 +20,7 @@
     "author": "roger deutsch",
     "license": "CC0-1.0",
     "devDependencies": {
-        "electron": "^6.0.9",
+        "electron": "^6.0.12",
         "electron-builder": "^21.2.0",
         "electron-toolkit": "^1.0.24"
     },
@@ -38,11 +38,13 @@
             "output": "dist",
             "buildResources": "build"
         },
-        
-        "linux" :{
+        "linux": {
             "category": "Utility.Passwords",
             "icon": "CYaPass.png",
             "executableName": "cyapass"
+        },
+        "win":{
+            "icon": "build/CYaPass512.png"
         }
     }
 }
