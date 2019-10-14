@@ -1,7 +1,7 @@
 {
     "name": "C'YaPass",
-    "version": "1.0.6",
-    "description": "Draw your password!\nNever type a password again.\nNever memorize a password again.\nNever make up a password again.",
+    "version": "1.0.7",
+    "description": "Draw your password.\nNever type a password again.\nNever memorize a password again.\nNever make up a password again.",
     "main": "main.js",
     "scripts": {
         "start": "electron .",
@@ -32,37 +32,17 @@
         "appId": "com.cyapass.C'YaPass",
         "copyright": "Copyright © 2019 roger deutsch",
         "productName": "C'YaPass",
-        "electronVersion": "6.0.9",
+        "electronVersion": "6.0.10",
         "asar": true,
         "directories": {
-            "app": "C:\\Dev\\electron\\CYaPass-Electron",
-            "output": "dist"
+            "output": "dist",
+            "buildResources": "build"
         },
-        "win": {
-            "target": [
-                {
-                    "target": "nsis",
-                    "arch": [
-                        "x64"
-                    ]
-                }
-            ]
-        },
-        "linux": {
-            "target": [
-                {
-                    "target": "AppImage",
-                    "arch": [
-                        "x64"
-                    ]
-                },
-                {
-                    "target": "debian package (deb)",
-                    "arch": [
-                        "x64"
-                    ]
-                }
-            ]
+        
+        "linux" :{
+            "category": "Utility.Passwords",
+            "icon": "CYaPass.png",
+            "executableName": "cyapass"
         }
     }
 }
