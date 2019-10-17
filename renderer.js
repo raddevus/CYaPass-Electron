@@ -405,7 +405,7 @@ function addSpecialChars(){
 		console.log("target : " + target);
 		localPwd += specialChars;
 		console.log("1 localPwd : " + localPwd);
-		localPwd = localPwd + target.substring(2, target.length - charOffset);
+		localPwd = localPwd + target.substring(2, target.length - specialChars.length);
 		console.log("2 localPwd : " + localPwd);
 		pwd = localPwd;
 	}
