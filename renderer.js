@@ -600,7 +600,7 @@ function SiteKey(initKey){
 		this.MaxLength =  initKey.MaxLength || 0;
 		this.HasSpecialChars = initKey.HasSpecialChars || false;
 		this.HasUpperCase = initKey.HasUpperCase || false;
-		this.Key = btoa(encodeURI(initKey.Key));
+		this.Key = btoa(initKey.Key);
 		
 	}
 	else{
@@ -608,16 +608,16 @@ function SiteKey(initKey){
 		this.MaxLength =  0;
 		this.HasSpecialChars = false;
 		this.HasUpperCase = false;
-		this.Key = btoa(encodeURI(initKey));
+		this.Key = btoa(initKey);
 	}
 }
 
 function getEncodedKey(keyValue){
-	return btoa(encodeURI(keyValue));
+	return btoa(keyValue);
 }
 function getDecodedKey(keyValue){
 		try {
-			return decodeURI(atob(keyValue));
+			return atob(keyValue);
 		}
 		catch (e){
 			// handling this exception helps protect against the
