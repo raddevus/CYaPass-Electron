@@ -529,6 +529,14 @@ function initApp(){
 	
 	ctx.canvas.height  = 255;
 	ctx.canvas.width = ctx.canvas.height;
+	
+	$(document).on("keydown", function (e) {
+		if (e.which === 123 /* F12 */) {
+			require('electron').remote.getCurrentWindow().toggleDevTools();
+		} else if (e.which === 116 /* F5 */) {
+			location.reload();
+		}
+	});
 	$("#OKSiteKeyButton").click(addOrEditSiteKey);
 	$("#OKDeleteButton").click(deleteSiteKey);
 	$("#AddSiteKeyModal").keypress(handleEnterKey);
