@@ -1,6 +1,6 @@
 {
     "name": "C'YaPass",
-    "version": "1.0.10",
+    "version": "1.0.11",
     "description": "Draw your password.\nNever type a password again.\nNever memorize a password again.\nNever make up a password again.",
     "main": "main.js",
     "scripts": {
@@ -26,7 +26,8 @@
     },
     "dependencies": {
         "bootstrap": "^4.3.1",
-        "jquery": "^3.4.1"
+        "jquery": "^3.4.1",
+        "minimist": ">=1.2.3"
     },
     "build": {
         "appId": "com.cyapass.C'YaPass",
