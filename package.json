@@ -1,51 +1,51 @@
 {
-    "name": "C'YaPass",
-    "version": "1.0.12",
-    "description": "Draw your password.\nNever type a password again.\nNever memorize a password again.\nNever make up a password again.",
-    "main": "main.js",
-    "scripts": {
-        "start": "electron .",
-        "electron-toolkit": "electron ./node_modules/electron-toolkit",
-        "pack": "electron-builder --dir",
-        "dist": "electron-builder"
+  "name": "C'YaPass",
+  "version": "1.0.12",
+  "description": "Draw your password.\nNever type a password again.\nNever memorize a password again.\nNever make up a password again.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "electron-toolkit": "electron ./node_modules/electron-toolkit",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "repository": "https://github.com/raddevus/CYaPass-Electron",
+  "keywords": [
+    "C'YaPass",
+    "password",
+    "never",
+    "type",
+    "again"
+  ],
+  "author": "roger deutsch",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^9.1.1",
+    "electron-builder": "^21.2.0",
+    "electron-toolkit": "^1.0.24"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.5.0",
+    "minimist": ">=1.2.3"
+  },
+  "build": {
+    "appId": "com.cyapass.C'YaPass",
+    "copyright": "Copyright © 2019 roger deutsch",
+    "productName": "C'YaPass",
+    "electronVersion": "6.0.10",
+    "asar": true,
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
     },
-    "repository": "https://github.com/raddevus/CYaPass-Electron",
-    "keywords": [
-        "C'YaPass",
-        "password",
-        "never",
-        "type",
-        "again"
-    ],
-    "author": "roger deutsch",
-    "license": "CC0-1.0",
-    "devDependencies": {
-        "electron": "^7.2.4",
-        "electron-builder": "^21.2.0",
-        "electron-toolkit": "^1.0.24"
+    "linux": {
+      "category": "Utility.Passwords",
+      "icon": "CYaPass.png",
+      "executableName": "cyapass"
     },
-    "dependencies": {
-        "bootstrap": "^4.3.1",
-        "jquery": "^3.5.0",
-        "minimist": ">=1.2.3"
-    },
-    "build": {
-        "appId": "com.cyapass.C'YaPass",
-        "copyright": "Copyright © 2019 roger deutsch",
-        "productName": "C'YaPass",
-        "electronVersion": "6.0.10",
-        "asar": true,
-        "directories": {
-            "output": "dist",
-            "buildResources": "build"
-        },
-        "linux": {
-            "category": "Utility.Passwords",
-            "icon": "CYaPass.png",
-            "executableName": "cyapass"
-        },
-        "win":{
-            "icon": "build/CYaPass512.png"
-        }
+    "win": {
+      "icon": "build/CYaPass512.png"
     }
+  }
 }
