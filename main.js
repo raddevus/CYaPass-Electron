@@ -12,7 +12,7 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    icon: 'CYaPass.png',
+    icon: __dirname + '/CYaPass.png',
     title:app.name + " : v" + app.getVersion(),
     webPreferences: {
       nodeIntegration: true,
