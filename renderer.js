@@ -373,18 +373,22 @@ function convertSiteKeys(){
 	}
 }
 
-function updateDetails(){
-	const replaceText = (selector, text) => {
-		const element = document.querySelector("#"+selector)
-		if (element) element.innerText = text
-	  } 
-	
-	  //replaceText(`app-path`,app.getPath('userData'));
-	
-	  for (const type of ['chrome', 'node', 'electron']) {
-		replaceText(`${type}-version`, process.versions[type])
-	  }
+
+function replaceText(selector, text){
+	const element = document.querySelector("#"+selector)
+	if (element){ element.innerText = text;}
+} 
+
+function updateDetails(){	
+	for (const type of ['chrome', 'node', 'electron']) {
+		replaceText(`${type}-version`, process.versions[type]);
+	}
 }
+
+ipc.on('getAppPath-reply', (event, arg) => {
+	// arg is appDataPath as string
+	replaceText(`app-path`,arg);
+});
 
 function initApp(){
 	
@@ -424,6 +428,7 @@ function initApp(){
 	siteListBoxChangeHandler();
 	sortSiteKeys();
 	updateDetails();
+	ipc.send('getAppPath',null);
 }
 
 function sortSiteKeys(){

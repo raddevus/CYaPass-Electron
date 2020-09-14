@@ -59,5 +59,6 @@ ipcMain.on('toggleDevTools', (event, args) => {
   mainWindow.webContents.toggleDevTools({mode:'docked'});
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+ipcMain.on('getAppPath', (event, args) => {
+  event.reply('getAppPath-reply', app.getPath('userData'));
+});
