@@ -119,7 +119,7 @@ function initAddDialogControlValues(){
 }
 var localSiteKey;
 function editButtonClick(){
-	
+	var clearTextItemKey = "";
 	$("#siteKeyErrMsg").text("");
 	var editItem = $("#SiteListBox option:selected").val();
 	console.log("editItem : " + editItem);
@@ -130,19 +130,7 @@ function editButtonClick(){
 	setAddDialogControlValues(localSiteKey);
 	isAddKey = false;
     $("#AddSiteKeyModal").modal('toggle');
-    $("#AddSiteKeyLabel").text("Edit Existing Site/Key");
-    var item = new SiteKey(clearTextItemKey);
-	item.HasSpecialChars = $("#addSpecialCharsCheckboxDlg").prop("checked");
-	item.HasUpperCase = $("#addUppercaseCheckboxDlg").prop("checked");
-
-	if (item.Key !== null && item.Key !== ""){
-		var localOption = new Option(clearTextItemKey, clearTextItemKey, false, true);
-		$('#SiteListBox').append($(localOption) );
-		$("#SiteKeyItem").val("");
-		$('#SiteListBox').val(clearTextItemKey).change();
-		allSiteKeys.push(item);
-        saveToLocalStorage();
-    }
+	$("#AddSiteKeyLabel").text("Edit Existing Site/Key");
 }
 
 function addButtonClick(){
@@ -334,7 +322,7 @@ function saveToLocalStorage()
   // Put the object into storage
 
   localStorage.setItem('siteKeys', JSON.stringify(allSiteKeys));
-  console.log(JSON.stringify(allSiteKeys));
+  // console.log(JSON.stringify(allSiteKeys));
   console.log("wrote siteKeys to localStorage");
   
 }
@@ -385,6 +373,19 @@ function convertSiteKeys(){
 	}
 }
 
+function updateDetails(){
+	const replaceText = (selector, text) => {
+		const element = document.querySelector("#"+selector)
+		if (element) element.innerText = text
+	  } 
+	
+	  //replaceText(`app-path`,app.getPath('userData'));
+	
+	  for (const type of ['chrome', 'node', 'electron']) {
+		replaceText(`${type}-version`, process.versions[type])
+	  }
+}
+
 function initApp(){
 	
 	theCanvas = document.getElementById("mainGrid");
@@ -422,6 +423,7 @@ function initApp(){
 	$('#SiteListBox option:last').prop('selected', true);
 	siteListBoxChangeHandler();
 	sortSiteKeys();
+	updateDetails();
 }
 
 function sortSiteKeys(){

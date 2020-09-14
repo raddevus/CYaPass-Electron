@@ -1,6 +1,6 @@
 {
   "name": "CYaPass",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Draw your password.\nNever type a password again.\nNever memorize a password again.\nNever make up a password again.",
   "main": "main.js",
   "scripts": {
@@ -21,21 +21,21 @@
   "author": "roger deutsch",
   "license": "CC0-4.0",
   "devDependencies": {
-    "electron": "^9.1.1",
+    "electron": "^10.1.1",
     "electron-builder": "^21.2.0",
     "electron-toolkit": "^1.0.24"
   },
   "dependencies": {
-    "bootstrap": "^4.3.1",
-    "jquery": "^3.5.0",
-    "minimist": ">=1.2.3",
-    "dot-prop": ">=4.2.1"
+    "bootstrap": "^4.5.2",
+    "dot-prop": ">=4.2.1",
+    "jquery": "^3.5.1",
+    "minimist": "^1.2.5"
   },
   "build": {
     "appId": "com.cyapass.CYaPass",
     "copyright": "Copyright © 2019 roger deutsch",
     "productName": "CYaPass",
-    "electronVersion": "9.1.1",
+    "electronVersion": "10.1.1",
     "asar": true,
     "directories": {
       "output": "dist",
