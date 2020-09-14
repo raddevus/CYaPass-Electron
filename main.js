@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, ipcMain} = require('electron')
 const path = require('path')
 
 
@@ -24,7 +24,6 @@ function createWindow () {
   
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
-  mainWindow.webContents.openDevTools({ mode: 'undocked' });
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -55,6 +54,11 @@ app.on('activate', function () {
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) createWindow()
 })
+
+ipcMain.on('toggleDevTools', (event, args) => {
+  console.log("opening dev tools");
+  mainWindow.webContents.toggleDevTools({mode:'docked'});
+});
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
