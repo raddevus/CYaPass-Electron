@@ -30,6 +30,12 @@
          <input type = "number" max="64" min="0" class="form-control" id="maxLength" value="32">
        </div>
      </form>
+     <form class="form-inline">
+      <div class="topPad bottomPad">
+        <button type="button" class="btn btn-sm btn-outline-primary" onclick="exportSiteKeys()">Export SiteKeys</button>
+        <button type="button" class="btn btn-sm btn-outline-primary" onclick="importSiteKeys()">Import SiteKeys</button>
+       </div>
+    </form>
    </div>
    <div class="col-sm-6" >
    <h3 class="cyaHeader">2. Draw a pattern</h3>
@@ -49,6 +55,12 @@
      </div>
    </div>
  </div>
+</div>
+<div class="topPad bottomPad">
+  We are using Node.js <span id="node-version"></span>,
+  Chromium <span id="chrome-version"></span>,
+  and Electron <span id="electron-version"></span>.
+  <br/>App-Path : <span id="app-path"></span>
 </div>
 <div class="modal fade" id="AddSiteKeyModal" tabindex="-1" role="dialog" aria-labelledby="AddSiteKeyLabel">
  <div class="modal-dialog" role="document">
@@ -116,12 +128,6 @@
      </div>
    </div>
  </div>
-</div>
-<div>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
-    <br/>App-Path : <span id="app-path"></span>
 </div>
 </body>
     <!-- You can also require other files to run in this process -->
