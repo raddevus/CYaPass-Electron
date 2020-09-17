@@ -137,7 +137,7 @@ function addButtonClick(){
 	document.querySelector("#siteKeyErrMsg").innerHTML = "";
 	initAddDialogControlValues();
 	isAddKey = true;
-	document.querySelector("#AddSiteKeyModal").modal('toggle');
+	$("#AddSiteKeyModal").modal('toggle');
 	document.querySelector("#AddSiteKeyLabel").innerHTML = "Add New Site/Key";
 }
 
@@ -177,37 +177,37 @@ function editSiteKey(){
 function addSiteKey(){
 
 	console.log("addSiteKey 1");
-	$("#siteKeyErrMsg").text("");
-	var clearTextItemKey = $("#SiteKeyItem").val();
+	document.querySelector("#siteKeyErrMsg").innerHTML = "";
+	var clearTextItemKey = document.querySelector("#SiteKeyItem").value;
 	var item = new SiteKey(clearTextItemKey);
-	item.HasSpecialChars = $("#addSpecialCharsCheckboxDlg").prop("checked");
-	item.HasUpperCase = $("#addUppercaseCheckboxDlg").prop("checked");
-	if ($("#setMaxLengthCheckboxDlg").prop("checked")){
-		item.MaxLength = $("#maxLengthDlg").val();
+	item.HasSpecialChars = document.querySelector("#addSpecialCharsCheckboxDlg").checked;
+	item.HasUpperCase = document.querySelector("#addUppercaseCheckboxDlg").checked;
+	if (document.querySelector("#setMaxLengthCheckboxDlg").checked){
+		item.MaxLength = document.querySelector("#maxLengthDlg").val();
 	}
 
 	if (item.Key !== null && item.Key !== ""){
 		var localOption = new Option(clearTextItemKey, clearTextItemKey, false, true);
-		$('#SiteListBox').append($(localOption) );
-		$("#SiteKeyItem").val("");
-		$('#SiteListBox').val(clearTextItemKey).change();
+		document.querySelector('#SiteListBox').add(localOption);
+		document.querySelector("#SiteKeyItem").value = "";
+		document.querySelector('#SiteListBox').value = clearTextItemKey;
 		allSiteKeys.push(item);
 		saveToLocalStorage();
 		
 		$('#AddSiteKeyModal').modal('hide');
 	}
 	else{
-		$("#siteKeyErrMsg").text("Please type a valid site/key.");
+		document.querySelector("#siteKeyErrMsg").innerHTML = "Please type a valid site/key.";
 	}
 	initAddDialogControlValues();
 	$("#AddSiteKeyModal").data.currentSiteKey = null;
-	 $("#SiteListBox option:last").prop("selected",true);
-	 siteListBoxChangeHandler();
+	$("#SiteListBox option:last").prop("selected",true);
+	siteListBoxChangeHandler();
 }
 
 function loadSiteKeyList(item){
 	var localOption = new Option(getDecodedKey(item.Key), getDecodedKey(item.Key), false, false);
-		$('#SiteListBox').append($(localOption) );
+	document.querySelector('#SiteListBox').add(localOption);
 }
 
 function addUppercaseLetter(){
