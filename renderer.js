@@ -22,7 +22,7 @@ var isAddKey = true;
 
 
 function generatePassword(){
-    var selectedItemText = $("#SiteListBox option:selected").text();
+    var selectedItemText = document.querySelector("#SiteListBox option:checked").value;
 
 	if (selectedItemText === null || selectedItemText === ""){
 		return;
@@ -35,17 +35,17 @@ function generatePassword(){
 	console.log("ComputeHashBytes() : " + pwd);
 	addUppercaseLetter();
 	console.log ("pwd 1: " + pwd);
-	if ($("#addSpecialCharsCheckBox").attr('checked') || $("#addSpecialCharsCheckBox").prop('checked')){
+	if (document.querySelector("#addSpecialCharsCheckBox").checked){
 		addSpecialChars();
 	}
-	if ($("#maxLengthCheckBox").attr('checked') || $("#maxLengthCheckBox").prop('checked')){
+	if (document.querySelector("#maxLengthCheckBox").checked){
 		setMaxLength();
 	}
 	
-	$("#passwordText").val(pwd);
-	$("#passwordText").select();
+	document.querySelector("#passwordText").value = pwd;
+	document.querySelector("#passwordText").select();
 	document.execCommand("copy");
-	$("#SiteListBox").focus();
+	document.querySelector("#SiteListBox").focus();
 }
 
 function setMaxLength(){
