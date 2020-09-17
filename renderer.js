@@ -55,7 +55,14 @@ function setMaxLength(){
 
 function siteListBoxChangeHandler(){
 	console.log("change handler...");
+	var itemKey = null;
+	try{
 	var itemKey = document.querySelector("#SiteListBox option:checked").value;
+	}
+	catch{
+		console.log("exception occurred because no item is selected. Non-fatal error.");
+		return;
+	}
 	console.log("itemKey : " + itemKey);
 	var currentSiteKey = getExistingSiteKey(getEncodedKey(itemKey));
 
@@ -214,7 +221,7 @@ function addUppercaseLetter(){
 	var target = pwd;
 
 	if (target === null || target === ""){ return;}
-	if ($("#addUppercaseCheckBox").attr('checked') || $("#addUppercaseCheckBox").prop('checked')){
+	if ( document.querySelector("#addUppercaseCheckBox").checked){
 		console.log("checked");
 		
 		var foundChar = "";
@@ -241,12 +248,12 @@ function addUppercaseLetter(){
 
 function addSpecialChars(){
 	console.log("addSpecialChars...");
-	var specialChars = $("#specialChars").val();
+	var specialChars = document.querySelector("#specialChars").value;
 	if (specialChars == null || specialChars == ""){ return;}
 	var target = pwd;
 	if (target === null || target == ""){ return;}
 
-	if ($("#addSpecialCharsCheckBox").attr('checked') || $("#addSpecialCharsCheckBox").prop('checked')){
+	if (document.querySelector("#addSpecialCharsCheckBox").checked){
 		console.log("special chars...");
 		var charOffset = 2;
         var localPwd = target.substring(0, charOffset);
@@ -271,11 +278,11 @@ function handleEnterKey(e){
 var selectedItem;
 function deleteButtonClick(){
 	//
-	selectedItem = $("#SiteListBox option:selected").text();
+	selectedItem = document.querySelector("#SiteListBox option:checked").innerHTML;
 	console.log(selectedItem);
 	if (selectedItem !== null && selectedItem !== ""){
-		$("#siteKeyDelMsg").text("Click [OK] to delete the site/key: ");
-		$("#siteKeyDelValue").text(selectedItem);
+		document.querySelector("#siteKeyDelMsg").innerHTML = "Click [OK] to delete the site/key: ";
+		document.querySelector("#siteKeyDelValue").innerHTML = selectedItem;
 		$("#DeleteSiteKeyModal").modal('toggle');
 	}
 }
@@ -286,9 +293,8 @@ function clearButtonClick(){
 	generateAllPosts();
 	drawGridLines();
 	drawPosts();
-	$("#passwordText").val("");
-	$("#hidePatternCheckBox").attr('checked',false);
-	$("#hidePatternCheckBox").prop('checked',false)
+	document.querySelector("#passwordText").value = "";
+	document.querySelector("#hidePatternCheckBox").checked = false;
 }
 
 function deleteSiteKey(){
