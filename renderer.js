@@ -96,26 +96,26 @@ function replaceSiteKeyInList(siteKey){
 }
 
 function setAddDialogControlValues(siteKey){
-	$("#addSpecialCharsCheckboxDlg").prop("checked", siteKey.HasSpecialChars);
-	$("#addUppercaseCheckboxDlg").prop("checked", siteKey.HasUpperCase);
+	document.querySelector("#addSpecialCharsCheckboxDlg").checked = siteKey.HasSpecialChars;
+	document.querySelector("#addUppercaseCheckboxDlg").checked = siteKey.HasUpperCase;
 	
 	if (siteKey.MaxLength > 0){
-		$("#maxLengthDlg").val(siteKey.MaxLength);
-		$("#setMaxLengthCheckboxDlg").prop("checked", true);
+		document.querySelector("#maxLengthDlg").value = siteKey.MaxLength;
+		document.querySelector("#setMaxLengthCheckboxDlg").checked = true;
 	}
 	else{
-		$("#maxLengthDlg").val(32);
-		$("#setMaxLengthCheckboxDlg").prop("checked", false);
+		document.querySelector("#maxLengthDlg").value = 32;
+		document.querySelector("#setMaxLengthCheckboxDlg").checked = false;
 	}
 }
 
 function initAddDialogControlValues(){
 	$("#AddSiteKeyModal").data.currentSiteKey = null;
-	$("#SiteKeyItem").val("");
-	$("#addSpecialCharsCheckboxDlg").prop("checked", false);
-	$("#addUppercaseCheckboxDlg").prop("checked", false);
-	$("#setMaxLengthCheckboxDlg").prop("checked", false);
-	$("#maxLengthDlg").val("32");
+	document.querySelector("#SiteKeyItem").value = "";
+	document.querySelector("#addSpecialCharsCheckboxDlg").checked = false;
+	document.querySelector("#addUppercaseCheckboxDlg").checked = false;
+	document.querySelector("#setMaxLengthCheckboxDlg").checked = false;
+	document.querySelector("#maxLengthDlg").value = 33;
 }
 var localSiteKey;
 function editButtonClick(){
