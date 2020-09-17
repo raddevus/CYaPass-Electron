@@ -49,7 +49,7 @@ function generatePassword(){
 }
 
 function setMaxLength(){
-	var maxLength = $("#maxLength").val();
+	var maxLength = document.querySelector("#maxLength").value;
 	pwd = pwd.substr(0, maxLength);
 }
 
@@ -190,7 +190,7 @@ function addSiteKey(){
 	item.HasSpecialChars = document.querySelector("#addSpecialCharsCheckboxDlg").checked;
 	item.HasUpperCase = document.querySelector("#addUppercaseCheckboxDlg").checked;
 	if (document.querySelector("#setMaxLengthCheckboxDlg").checked){
-		item.MaxLength = document.querySelector("#maxLengthDlg").val();
+		item.MaxLength = document.querySelector("#maxLengthDlg").value;
 	}
 
 	if (item.Key !== null && item.Key !== ""){
@@ -301,10 +301,10 @@ function deleteSiteKey(){
 	console.log("selectedItem : " );
 	console.log(selectedItem);
 	var removeItem = "#SiteListBox option[value='" + selectedItem + "']";
-	$(removeItem).remove();
+	document.querySelector(removeItem).remove();
 	deleteItemFromLocalStorage(getEncodedKey(selectedItem));
 	$("#DeleteSiteKeyModal").modal('hide');
-	$("#passwordText").val("");
+	document.querySelector("#passwordText").value ="";
 	siteListBoxChangeHandler();
 	sortSiteKeys();
 }
@@ -343,6 +343,8 @@ function deleteItemFromLocalStorage(encodedKey){
 // #####################################################################
 
 function initSiteKeys(){
+	// There is not good native JS to remove all the items
+	// in the option list box so I'm using jQuery empty()
 	$("#SiteListBox").empty();
 	if (localStorage.getItem("siteKeys") !== null && localStorage.getItem("siteKeys") !== "null") {
 		allSiteKeys = JSON.parse(localStorage["siteKeys"]);
@@ -407,21 +409,21 @@ function initApp(){
 			location.reload();
 		}
 	});
-	$("#OKSiteKeyButton").click(addOrEditSiteKey);
-	$("#OKDeleteButton").click(deleteSiteKey);
-	$("#AddSiteKeyModal").keypress(handleEnterKey);
+	document.querySelector("#OKSiteKeyButton").addEventListener("click",addOrEditSiteKey);
+	document.querySelector("#OKDeleteButton").addEventListener("click",deleteSiteKey);
+	document.querySelector("#AddSiteKeyModal").addEventListener("keypress",handleEnterKey);
 	$('#AddSiteKeyModal').on('shown.bs.modal', function () {
-		$("#SiteKeyItem").focus();
+		document.querySelector("#SiteKeyItem").focus();
 	});
-	$('#SiteListBox').on('change', siteListBoxChangeHandler);
+	document.querySelector('#SiteListBox').addEventListener('change', siteListBoxChangeHandler);
 
-	$('#addUppercaseCheckBox').on('change', generatePassword);
-	$('#addSpecialCharsCheckBox').on('change', generatePassword);
-	$("#specialChars").on('input', generatePassword);
-	$("#maxLength").on('input', generatePassword);
-	$("#maxLengthCheckBox").on('change', generatePassword);
+	document.querySelector('#addUppercaseCheckBox').addEventListener('change', generatePassword);
+	document.querySelector('#addSpecialCharsCheckBox').addEventListener('change', generatePassword);
+	document.querySelector("#specialChars").addEventListener('input', generatePassword);
+	document.querySelector("#maxLength").addEventListener('input', generatePassword);
+	document.querySelector("#maxLengthCheckBox").addEventListener('change', generatePassword);
 	
-	$("#passwordText").removeClass("noselect");
+	document.querySelector("#passwordText").classList.remove("noselect");
 
 	initGrid();
 	initSiteKeys();
