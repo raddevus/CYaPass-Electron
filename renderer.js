@@ -55,17 +55,17 @@ function setMaxLength(){
 
 function siteListBoxChangeHandler(){
 	console.log("change handler...");
-	var itemKey = $("#SiteListBox option:selected").val();
+	var itemKey = document.querySelector("#SiteListBox option:checked").value;
 	console.log("itemKey : " + itemKey);
 	var currentSiteKey = getExistingSiteKey(getEncodedKey(itemKey));
 
 	if (currentSiteKey !== null){
-		$("#addUppercaseCheckBox").prop("checked", currentSiteKey.HasUpperCase);
-		$("#addSpecialCharsCheckBox").prop("checked", currentSiteKey.HasSpecialChars);
-		$("#maxLengthCheckBox").prop("checked", currentSiteKey.MaxLength > 0);
+		document.querySelector("#addUppercaseCheckBox").checked = currentSiteKey.HasUpperCase;
+		document.querySelector("#addSpecialCharsCheckBox").checked = currentSiteKey.HasSpecialChars;
+		document.querySelector("#maxLengthCheckBox").checked = (currentSiteKey.MaxLength > 0);
 		console.log(currentSiteKey.MaxLength);
 		if (currentSiteKey.MaxLength > 0){
-			$("#maxLength").val(currentSiteKey.MaxLength);
+			document.querySelector("#maxLength").value = currentSiteKey.MaxLength;
 		}
 		
 	}
