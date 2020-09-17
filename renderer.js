@@ -137,7 +137,7 @@ function addButtonClick(){
 	document.querySelector("#siteKeyErrMsg").innerHTML = "";
 	initAddDialogControlValues();
 	isAddKey = true;
-	$("#AddSiteKeyModal").modal('toggle');
+	document.querySelector("#AddSiteKeyModal").modal('toggle');
 	document.querySelector("#AddSiteKeyLabel").innerHTML = "Add New Site/Key";
 }
 
@@ -153,30 +153,25 @@ function addOrEditSiteKey(){
 }
 
 function editSiteKey(){
-	
-	//if ($("#AddSiteKeyModal").data.currentSiteKey !== null){
-		//var localSiteKey = $("#AddSiteKeyModal").data.currentSiteKey;
-		console.log(localSiteKey);
-		localSiteKey.HasSpecialChars = $("#addSpecialCharsCheckboxDlg").prop("checked");
-		localSiteKey.HasUpperCase = $("#addUppercaseCheckboxDlg").prop("checked");
-		if ($("#setMaxLengthCheckboxDlg").prop("checked")){
-			localSiteKey.MaxLength = $("#maxLengthDlg").val();
-		}
-		else{
-			localSiteKey.MaxLength = 0;
-		}
-		replaceSiteKeyInList(localSiteKey);
-		saveToLocalStorage();
-		
-		$("#AddSiteKeyModal").modal('hide');
-		
-		initAddDialogControlValues();
-		$("#AddSiteKeyModal").data.currentSiteKey = null;
-		siteListBoxChangeHandler();
-		
-		return true;
-	//}
-	
+	console.log(localSiteKey);
+	localSiteKey.HasSpecialChars = document.querySelector("#addSpecialCharsCheckboxDlg").checked;
+	localSiteKey.HasUpperCase = document.querySelector("#addUppercaseCheckboxDlg").checked;
+	if (document.querySelector("#setMaxLengthCheckboxDlg").checked){
+		localSiteKey.MaxLength = document.querySelector("#maxLengthDlg").value;
+	}
+	else{
+		localSiteKey.MaxLength = 0;
+	}
+	replaceSiteKeyInList(localSiteKey);
+	saveToLocalStorage();
+
+	$("#AddSiteKeyModal").modal('hide');
+
+	initAddDialogControlValues();
+	$("#AddSiteKeyModal").data.currentSiteKey = null;
+	siteListBoxChangeHandler();
+
+	return true;
 }
 
 function addSiteKey(){
