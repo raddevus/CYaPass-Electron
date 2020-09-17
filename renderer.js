@@ -115,30 +115,30 @@ function initAddDialogControlValues(){
 	document.querySelector("#addSpecialCharsCheckboxDlg").checked = false;
 	document.querySelector("#addUppercaseCheckboxDlg").checked = false;
 	document.querySelector("#setMaxLengthCheckboxDlg").checked = false;
-	document.querySelector("#maxLengthDlg").value = 33;
+	document.querySelector("#maxLengthDlg").value = 32;
 }
 var localSiteKey;
 function editButtonClick(){
 	var clearTextItemKey = "";
-	$("#siteKeyErrMsg").text("");
-	var editItem = $("#SiteListBox option:selected").val();
+	document.querySelector("#siteKeyErrMsg").innerHTML = "";
+	var editItem = document.querySelector("#SiteListBox option:checked").value;
 	console.log("editItem : " + editItem);
-	$("#SiteKeyItem").val(editItem);
+	document.querySelector("#SiteKeyItem").value = editItem;
 	
 	console.log("encodedKey : " + getEncodedKey(editItem));
 	localSiteKey = getExistingSiteKey(getEncodedKey(editItem));
 	setAddDialogControlValues(localSiteKey);
 	isAddKey = false;
     $("#AddSiteKeyModal").modal('toggle');
-	$("#AddSiteKeyLabel").text("Edit Existing Site/Key");
+	document.querySelector("#AddSiteKeyLabel").innerHTML = "Edit Existing Site/Key";
 }
 
 function addButtonClick(){
-	$("#siteKeyErrMsg").text("");
+	document.querySelector("#siteKeyErrMsg").innerHTML = "";
 	initAddDialogControlValues();
 	isAddKey = true;
 	$("#AddSiteKeyModal").modal('toggle');
-	$("#AddSiteKeyLabel").text("Add New Site/Key");
+	document.querySelector("#AddSiteKeyLabel").innerHTML = "Add New Site/Key";
 }
 
 function addOrEditSiteKey(){
