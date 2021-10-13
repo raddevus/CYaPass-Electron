@@ -21,7 +21,7 @@
   "author": "roger deutsch",
   "license": "CC0-4.0",
   "devDependencies": {
-    "electron": "^10.2.0",
+    "electron": "^11.5.0",
     "electron-builder": "^21.2.0",
     "electron-toolkit": "^1.0.24"
   },
