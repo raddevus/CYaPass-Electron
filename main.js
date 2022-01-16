@@ -15,6 +15,7 @@ function createWindow () {
     icon: __dirname + '/CYaPass.png',
     title:app.name + " : v" + app.getVersion(),
     webPreferences: {
+      contextIsolation: false,
       nodeIntegration: true,
     }
   })
