@@ -22,8 +22,8 @@
   "license": "CC0-4.0",
   "devDependencies": {
     "electron": "^11.5.0",
-    "electron-builder": "^21.2.0",
-    "electron-toolkit": "^1.0.24"
+    "electron-builder": "^22.14.5",
+    "electron-toolkit": "^1.0.1"
   },
   "dependencies": {
     "bootstrap": "^4.5.2",
