@@ -227,6 +227,11 @@ function okExportHandler(){
 	exportSiteKeys();
 }
 
+function encryptSiteKeys(){
+	let siteKeysAsString = localStorage.getItem("siteKeys");
+	
+}
+
 function exportSiteKeys(){
 /*
 	const formDataX = new FormData();
