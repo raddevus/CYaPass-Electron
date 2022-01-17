@@ -309,6 +309,7 @@ function clearButtonClick(){
 	drawPosts();
 	document.querySelector("#passwordText").value = "";
 	document.querySelector("#hidePatternCheckBox").checked = false;
+	pwd = "";
 }
 
 function deleteSiteKey(){
