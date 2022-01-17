@@ -219,24 +219,27 @@ function okExportHandler(){
 		document.querySelector("#SecretId").focus();
 		return;
 	}
-	
+
+	let secretId = document.querySelector("#SecretId").value;
 	document.querySelector("#secretIdErrMsg").innerHTML = "";
 	document.querySelector("#SecretId").value = "";
-	$("#ExportModal").modal('toggle');
 	
-	exportSiteKeys();
+	$("#ExportModal").modal('toggle');
+	exportSiteKeys(encryptSiteKeys(),secretId);
 }
-
+	
 function encryptSiteKeys(){
 	let siteKeysAsString = localStorage.getItem("siteKeys");
-	
+	//console.log(`siteKeysAsString : ${siteKeysAsString}`);
+	let encrypted = encryptDataBuffer(siteKeysAsString);
+	return encrypted;
 }
 
-function exportSiteKeys(){
-/*
+function exportSiteKeys(encryptedData, secretId){
+
 	const formDataX = new FormData();
-	formDataX.append("key","1857Ac032904e72");
-	formDataX.append("data","this is data from CYA-ELECTRON")
+	formDataX.append("key",secretId);
+	formDataX.append("data",encryptedData);
 
 	fetch("http://localhost:5243/Cya/SaveData", {
 		method: 'POST',
@@ -245,7 +248,7 @@ function exportSiteKeys(){
 		})
 		.then(response => response.json())
 		.then(data => console.log(data));
-*/
+
 	// fetch("https://NewLibre.com/LibreStore/Data/SaveData?key=2022-01-17Unq1&data=First data test 1.0")
   	// 	.then(response => response.json())
   	// 	.then(data => console.log(data));
