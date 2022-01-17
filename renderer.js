@@ -1,4 +1,5 @@
 const ipc = require('electron').ipcRenderer
+
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
@@ -212,6 +213,19 @@ function addSiteKey(){
 	siteListBoxChangeHandler();
 }
 
+function exportSiteKeys(){
+	if (pwd == ""){
+		$("#ExportMsgModal").modal('toggle');
+		//alert("Please draw your encryption password & try again.");
+		return;
+	}
+	$("#ExportModal").modal('toggle');
+}
+
+function importSiteKeys(){
+	$("#ImportModal").modal('toggle');
+}
+
 function loadSiteKeyList(item){
 	var localOption = new Option(getDecodedKey(item.Key), getDecodedKey(item.Key), false, false);
 	document.querySelector('#SiteListBox').add(localOption);
@@ -401,7 +415,8 @@ function initApp(){
 	ctx.canvas.height  = 255;
 	ctx.canvas.width = ctx.canvas.height;
 	
-	$(document).on("keydown", function (e) {
+	
+	document.querySelector("html").addEventListener("keydown", function (e) {
 		if (e.which === 123 /* F12 */) {
 			console.log("got F12");
 			ipc.send('toggleDevTools',null);
@@ -409,9 +424,11 @@ function initApp(){
 			location.reload();
 		}
 	});
+
 	document.querySelector("#OKSiteKeyButton").addEventListener("click",addOrEditSiteKey);
 	document.querySelector("#OKDeleteButton").addEventListener("click",deleteSiteKey);
 	document.querySelector("#AddSiteKeyModal").addEventListener("keypress",handleEnterKey);
+	document.querySelector("#OKExportButton").addEventListener("click",exportSiteKeys)
 	$('#AddSiteKeyModal').on('shown.bs.modal', function () {
 		document.querySelector("#SiteKeyItem").focus();
 	});

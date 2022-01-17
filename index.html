@@ -129,6 +129,47 @@
    </div>
  </div>
 </div>
+
+<div class="modal fade" id="ExportModal" tabindex="-1" role="dialog" aria-labelledby="ExportLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-title">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="ExportLabel">Export Encrypted Site/Keys</h4>
+      </div>
+      <div class="modal-body">
+        <label for="SiteKeyItem">CYa Secret ID</label> <span id="secretIdErrMsg"></span>
+         <input class="form-control" type="text" id="SecretId" autofocus placeholder="CYa Secret Id">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-outline-primary btn-submit" data-dismiss="modal">Cancel</button>
+        <button id="OKExportButton" type="button" class="btn btn-sm btn-primary">OK</button>
+      </div>
+    </div>
+  </div>
+ </div>
+
+ <div class="modal" id="ExportMsgModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+  
+      <div class="modal-header">
+        <h4 class="modal-title">Please Draw Encryption Password</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        To insure your Site/Key Export is secure you must draw a password.<br/>
+        The password will be used to AES256 Encrypt your data.
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+      
+    </div>
+  </div>
+</div>
 </body>
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
