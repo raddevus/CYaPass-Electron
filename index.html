@@ -32,8 +32,8 @@
      </form>
      <form class="form-inline">
       <div class="topPad bottomPad">
-        <button type="button" class="btn btn-sm btn-outline-primary" onclick="exportSiteKeys()">Export SiteKeys</button>
-        <button type="button" class="btn btn-sm btn-outline-primary" onclick="importSiteKeys()">Import SiteKeys</button>
+        <button type="button" class="btn btn-sm btn-outline-primary" onclick="exportButtonHandler()">Export SiteKeys</button>
+        <button type="button" class="btn btn-sm btn-outline-primary" onclick="importButtonHandler()">Import SiteKeys</button>
        </div>
     </form>
    </div>
@@ -71,7 +71,7 @@
      </div>
      <div class="modal-body">
        <label for="SiteKeyItem">Site/Key</label> <span id="siteKeyErrMsg"></span>
-        <input class="form-control" type="text" id="SiteKeyItem" autofocus placeholder="Site/Key">
+f        <input class="form-control" type="text" id="SiteKeyItem" autofocus placeholder="Site/Key">
      <div class="form-check" id="addUpperCaseContainer">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -130,7 +130,7 @@
  </div>
 </div>
 
-<div class="modal fade" id="ExportModal" tabindex="-1" role="dialog" aria-labelledby="ExportLabel">
+<div class="modal fade" id="ExportModal" tabindex="2" role="dialog" aria-labelledby="ExportLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-title">

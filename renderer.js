@@ -213,26 +213,52 @@ function addSiteKey(){
 	siteListBoxChangeHandler();
 }
 
-function exportSiteKeys(){
-	if (pwd == ""){
-		$("#ExportMsgModal").modal('toggle');
+function okExportHandler(){
+	if (document.querySelector("#SecretId").value == ""){
+		document.querySelector("#secretIdErrMsg").innerHTML = "A SecretId is required to export your site/keys.";
+		document.querySelector("#SecretId").focus();
 		return;
 	}
+	
+	document.querySelector("#secretIdErrMsg").innerHTML = "";
+	document.querySelector("#SecretId").value = "";
 	$("#ExportModal").modal('toggle');
+	
+	exportSiteKeys();
+}
+
+function exportSiteKeys(){
+/*
 	const formDataX = new FormData();
 	formDataX.append("key","1857Ac032904e72");
 	formDataX.append("data","this is data from CYA-ELECTRON")
 
 	fetch("http://localhost:5243/Cya/SaveData", {
-	method: 'POST',
-	body: formDataX,
-	})
-	.then(response => response.json())
-	.then(data => console.log(data));
+		method: 'POST',
+		redirect: 'follow',
+		body: formDataX,
+		})
+		.then(response => response.json())
+		.then(data => console.log(data));
+*/
+	// fetch("https://NewLibre.com/LibreStore/Data/SaveData?key=2022-01-17Unq1&data=First data test 1.0")
+  	// 	.then(response => response.json())
+  	// 	.then(data => console.log(data));
 
+	// fetch("http://localhost:5243/Data/SaveData?key=2022-01-17Unq1&data=First data test 1.0")
+  	// 	.then(response => response.json())
+  	// 	.then(data => console.log(data));
 }
 
-function importSiteKeys(){
+function exportButtonHandler(){
+	if (pwd == ""){
+		$("#ExportMsgModal").modal('toggle');
+		return;
+	}
+	$("#ExportModal").modal('toggle');
+}
+
+function importButtonHandler(){
 	$("#ImportModal").modal('toggle');
 }
 
@@ -439,10 +465,15 @@ function initApp(){
 	document.querySelector("#OKSiteKeyButton").addEventListener("click",addOrEditSiteKey);
 	document.querySelector("#OKDeleteButton").addEventListener("click",deleteSiteKey);
 	document.querySelector("#AddSiteKeyModal").addEventListener("keypress",handleEnterKey);
-	document.querySelector("#OKExportButton").addEventListener("click",exportSiteKeys)
-	$('#AddSiteKeyModal').on('shown.bs.modal', function () {
+	document.querySelector("#OKExportButton").addEventListener("click",okExportHandler)
+	$("#AddSiteKeyModal").on("shown.bs.modal", function () {
 		document.querySelector("#SiteKeyItem").focus();
 	});
+
+	$("#ExportModal").on("shown.bs.modal", function () {
+		document.querySelector("#SecretId").focus();
+	});
+
 	document.querySelector('#SiteListBox').addEventListener('change', siteListBoxChangeHandler);
 
 	document.querySelector('#addUppercaseCheckBox').addEventListener('change', generatePassword);

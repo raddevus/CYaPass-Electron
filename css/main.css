@@ -7,7 +7,7 @@ html, #formBody { background-color:WhiteSmoke; padding-top: 5px;}
 #SiteListButtons{margin-left:20px;}
 #addUpperCaseContainer{padding-top : 15px;}
 .modal-title{padding: 5px 15px 0px 15px;}
-#siteKeyDelValue, #siteKeyErrMsg{color:red;}
+#secretIdErrMsg, #siteKeyDelValue, #siteKeyErrMsg{color:red;}
 #noshow{visibility:hidden;}
 .cyaHeader{font-size:large;color:blue; margin-left:10px;}
 .noselect {
