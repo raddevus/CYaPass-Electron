@@ -216,10 +216,20 @@ function addSiteKey(){
 function exportSiteKeys(){
 	if (pwd == ""){
 		$("#ExportMsgModal").modal('toggle');
-		//alert("Please draw your encryption password & try again.");
 		return;
 	}
 	$("#ExportModal").modal('toggle');
+	const formDataX = new FormData();
+	formDataX.append("key","1857Ac032904e72");
+	formDataX.append("data","this is data from CYA-ELECTRON")
+
+	fetch("http://localhost:5243/Cya/SaveData", {
+	method: 'POST',
+	body: formDataX,
+	})
+	.then(response => response.json())
+	.then(data => console.log(data));
+
 }
 
 function importSiteKeys(){
