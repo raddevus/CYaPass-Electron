@@ -241,7 +241,9 @@ function exportSiteKeys(encryptedData, secretId){
 	formDataX.append("key",secretId);
 	formDataX.append("data",encryptedData);
 
-	fetch("http://localhost:5243/Cya/SaveData", {
+	// let url = "http://localhost:5243/Cya/SaveData";
+	let url = "http://NewLibre.com/LibreStore/Cya/SaveData";
+	fetch(url, {
 		method: 'POST',
 		redirect: 'follow',
 		body: formDataX,
