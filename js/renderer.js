@@ -11,9 +11,10 @@ window.$ = $;
 
 //let bs = require('bootstrap');
 
-var ctx = null;
-var theCanvas = null;
+let ctx = null;
+let theCanvas = null;
 window.addEventListener("load", initApp);
+let isImport = false;
 
 // *******************************
 // ****** begin CYaPass code *****
@@ -214,18 +215,48 @@ function addSiteKey(){
 }
 
 function okExportHandler(){
+	
 	if (document.querySelector("#SecretId").value == ""){
 		document.querySelector("#secretIdErrMsg").innerHTML = "A SecretId is required to export your site/keys.";
 		document.querySelector("#SecretId").focus();
 		return;
 	}
-
+	
 	let secretId = document.querySelector("#SecretId").value;
 	document.querySelector("#secretIdErrMsg").innerHTML = "";
 	document.querySelector("#SecretId").value = "";
 	
 	$("#ExportModal").modal('toggle');
-	exportSiteKeys(encryptSiteKeys(),secretId);
+	if (isImport == undefined || isImport == false){
+		exportSiteKeys(encryptSiteKeys(),secretId);
+	}
+	else{
+		importSiteKeys(secretId);
+	}
+}
+
+function decryptSiteKeys(){
+	decryptDataBuffer()
+}
+
+function importSiteKeys(secretId){
+	
+	let url = "http://localhost:5243/Cya/GetData?key="+secretId;
+	//let url = "http://NewLibre.com/LibreStore/Cya/GetData"+secretId;
+	fetch(url, {
+		method: 'GET',
+		})
+		.then(response => response.json())
+		.then(data => {
+			if (data.success == true){
+				let siteKeys = decryptDataBuffer(data.cyabucket.data);
+				// alert(siteKeys);
+				localStorage.setItem("siteKeys",siteKeys);
+			}
+			else{
+				alert(data.message);
+			}
+		});
 }
 	
 function encryptSiteKeys(){
@@ -241,8 +272,8 @@ function exportSiteKeys(encryptedData, secretId){
 	formDataX.append("key",secretId);
 	formDataX.append("data",encryptedData);
 
-	// let url = "http://localhost:5243/Cya/SaveData";
-	let url = "http://NewLibre.com/LibreStore/Cya/SaveData";
+	let url = "http://localhost:5243/Cya/SaveData";
+	//let url = "http://NewLibre.com/LibreStore/Cya/SaveData";
 	fetch(url, {
 		method: 'POST',
 		redirect: 'follow',
@@ -251,17 +282,17 @@ function exportSiteKeys(encryptedData, secretId){
 		.then(response => response.json())
 		.then(data => console.log(data));
 
-	// fetch("https://NewLibre.com/LibreStore/Data/SaveData?key=2022-01-17Unq1&data=First data test 1.0")
-  	// 	.then(response => response.json())
-  	// 	.then(data => console.log(data));
-
-	// fetch("http://localhost:5243/Data/SaveData?key=2022-01-17Unq1&data=First data test 1.0")
-  	// 	.then(response => response.json())
-  	// 	.then(data => console.log(data));
 }
 
 function exportButtonHandler(){
+	isImport = false;
+	let msg = `To insure your Site/Key Export is secure you must draw a password.<br/>
+ 	The password will be used to encrypt your data (uses AES256).`;
+	let dialogHeader = "Export Encrypted Site/Keys";
+	document.querySelector("#ExportLabel").innerHTML = dialogHeader;
 	if (pwd == ""){
+		
+		document.querySelector("#exportMainMsg").innerHTML = msg;
 		$("#ExportMsgModal").modal('toggle');
 		return;
 	}
@@ -269,7 +300,18 @@ function exportButtonHandler(){
 }
 
 function importButtonHandler(){
-	$("#ImportModal").modal('toggle');
+	isImport = true;
+	let msg = `To import your Site/Key list you must draw a password.
+	The password is the one you used to encrypt your data, when you exported it.`;
+	let dialogHeader = "Import Encrypted Site/Keys";
+	document.querySelector("#ExportLabel").innerHTML = dialogHeader;
+	if (pwd == ""){
+		
+		document.querySelector("#exportMainMsg").innerHTML = msg;
+		$("#ExportMsgModal").modal("toggle");
+		return;
+	}
+	$("#ExportModal").modal('toggle');
 }
 
 function loadSiteKeyList(item){
