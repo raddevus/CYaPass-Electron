@@ -249,14 +249,22 @@ function importSiteKeys(secretId){
 		.then(response => response.json())
 		.then(data => {
 			if (data.success == true){
-				let siteKeys = decryptDataBuffer(data.cyabucket.data);
+				let siteKeys = JSON.parse(decryptDataBuffer(data.cyabucket.data));
 				// alert(siteKeys);
-				localStorage.setItem("siteKeys",siteKeys);
+				compareSiteKeys(siteKeys);
+				//localStorage.setItem("siteKeys",siteKeys);
 			}
 			else{
 				alert(data.message);
 			}
 		});
+}
+
+function compareSiteKeys(newSiteKeys){
+	origSiteKeys = JSON.parse(localStorage.getItem("siteKeys"));
+	var difference = newSiteKeys.filter(x => 
+		origSiteKeys.every(x2 => x2.Key !== x.Key));
+   	console.log(difference);
 }
 	
 function encryptSiteKeys(){
