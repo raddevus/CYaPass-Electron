@@ -251,7 +251,7 @@ function importSiteKeys(secretId){
 			if (data.success == true){
 				let siteKeys = JSON.parse(decryptDataBuffer(data.cyabucket.data));
 				// alert(siteKeys);
-				compareSiteKeys(siteKeys);
+				saveOnlyNewSiteKeys(siteKeys);
 				//localStorage.setItem("siteKeys",siteKeys);
 			}
 			else{
@@ -260,11 +260,17 @@ function importSiteKeys(secretId){
 		});
 }
 
-function compareSiteKeys(newSiteKeys){
+function saveOnlyNewSiteKeys(newSiteKeys){
 	origSiteKeys = JSON.parse(localStorage.getItem("siteKeys"));
-	var difference = newSiteKeys.filter(x => 
+	var allNewKeys = newSiteKeys.filter(x => 
 		origSiteKeys.every(x2 => x2.Key !== x.Key));
-   	console.log(difference);
+
+	allSiteKeys = origSiteKeys.concat(allNewKeys);
+	saveToLocalStorage();
+	initSiteKeys();
+	// following line insures the mainform is refreshed
+	// so the new keys are now sorted in alpha order
+	location.reload(true);
 }
 	
 function encryptSiteKeys(){
