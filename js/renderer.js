@@ -241,8 +241,8 @@ function decryptSiteKeys(){
 
 function importSiteKeys(secretId){
 	
-	let url = "http://localhost:5243/Cya/GetData?key="+secretId;
-	//let url = "http://NewLibre.com/LibreStore/Cya/GetData"+secretId;
+	//let url = "http://localhost:5243/Cya/GetData?key="+secretId;
+	let url = "http://NewLibre.com/LibreStore/Cya/GetData"+secretId;
 	fetch(url, {
 		method: 'GET',
 		})
@@ -286,8 +286,8 @@ function exportSiteKeys(encryptedData, secretId){
 	formDataX.append("key",secretId);
 	formDataX.append("data",encryptedData);
 
-	let url = "http://localhost:5243/Cya/SaveData";
-	//let url = "http://NewLibre.com/LibreStore/Cya/SaveData";
+	//let url = "http://localhost:5243/Cya/SaveData";
+	let url = "http://NewLibre.com/LibreStore/Cya/SaveData";
 	fetch(url, {
 		method: 'POST',
 		redirect: 'follow',
@@ -394,7 +394,7 @@ function handleEnterKey(e){
 var selectedItem;
 function deleteButtonClick(){
 	//
-	selectedItem = document.querySelector("#SiteListBox option:checked").innerHTML;
+	selectedItem = document.querySelector("#SiteListBox option:checked").value;
 	console.log(selectedItem);
 	if (selectedItem !== null && selectedItem !== ""){
 		document.querySelector("#siteKeyDelMsg").innerHTML = "Click [OK] to delete the site/key: ";
@@ -418,6 +418,7 @@ function deleteSiteKey(){
 	console.log("selectedItem : " );
 	console.log(selectedItem);
 	var removeItem = "#SiteListBox option[value='" + selectedItem + "']";
+	console.log(removeItem);
 	document.querySelector(removeItem).remove();
 	deleteItemFromLocalStorage(getEncodedKey(selectedItem));
 	$("#DeleteSiteKeyModal").modal('hide');
