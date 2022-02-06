@@ -242,7 +242,7 @@ function decryptSiteKeys(){
 function importSiteKeys(secretId){
 	
 	//let url = "http://localhost:5243/Cya/GetData?key="+secretId;
-	let url = "http://NewLibre.com/LibreStore/Cya/GetData"+secretId;
+	let url = "http://NewLibre.com/LibreStore/Cya/GetData?key="+secretId;
 	fetch(url, {
 		method: 'GET',
 		})
@@ -251,7 +251,8 @@ function importSiteKeys(secretId){
 			if (data.success == true){
 				let siteKeys = JSON.parse(decryptDataBuffer(data.cyabucket.data));
 				// alert(siteKeys);
-				saveOnlyNewSiteKeys(siteKeys);
+				let addKeyCount = saveOnlyNewSiteKeys(siteKeys);
+				importAlert(addKeyCount);
 				//localStorage.setItem("siteKeys",siteKeys);
 			}
 			else{
@@ -268,9 +269,12 @@ function saveOnlyNewSiteKeys(newSiteKeys){
 	allSiteKeys = origSiteKeys.concat(allNewKeys);
 	saveToLocalStorage();
 	initSiteKeys();
-	// following line insures the mainform is refreshed
+	// following line insures the sitekeys are refreshed
 	// so the new keys are now sorted in alpha order
-	location.reload(true);
+	sortSiteKeys();
+	
+	// return count of new keys added
+	return allNewKeys.length;
 }
 	
 function encryptSiteKeys(){
@@ -298,10 +302,18 @@ function exportSiteKeys(encryptedData, secretId){
 
 }
 
+function importAlert(keyCount) {
+	document.querySelector("#importCount").innerHTML = keyCount;
+	document.querySelector('.alert').style.display='block';
+	setInterval(() => {
+		document.querySelector('.alert').style.display='none';
+	}, 10000);
+}
+
 function exportButtonHandler(){
 	isImport = false;
-	let msg = `To insure your Site/Key Export is secure you must draw a password.<br/>
- 	The password will be used to encrypt your data (uses AES256).`;
+	let msg = `To insure your Site/Key Export is secure you must draw a password &amp; select a siteKey.<br/>
+ 	This will generate a password which will be used to encrypt your data (uses AES256).`;
 	let dialogHeader = "Export Encrypted Site/Keys";
 	document.querySelector("#ExportLabel").innerHTML = dialogHeader;
 	if (pwd == ""){
@@ -315,8 +327,8 @@ function exportButtonHandler(){
 
 function importButtonHandler(){
 	isImport = true;
-	let msg = `To import your Site/Key list you must draw a password.
-	The password is the one you used to encrypt your data, when you exported it.`;
+	let msg = `To import your Site/Key list you must draw a password &amp; select a siteKey.
+	This will generate the same password which was used to encrypt your data, when you exported it.`;
 	let dialogHeader = "Import Encrypted Site/Keys";
 	document.querySelector("#ExportLabel").innerHTML = dialogHeader;
 	if (pwd == ""){
@@ -346,7 +358,7 @@ function addUppercaseLetter(){
 			if (isNaN(target[i])){
 				console.log(target[i]);
 				foundChar = target[i];
-				target[i].toUpperCase();// = target[i].toUpperCase();
+				target[i].toUpperCase();
 				console.log(target[i].toUpperCase());
 				i = target.length;
 			}
@@ -512,7 +524,6 @@ ipc.on('getAppPath-reply', (event, arg) => {
 });
 
 function initApp(){
-	
 	theCanvas = document.getElementById("mainGrid");
 	ctx = theCanvas.getContext("2d");
 	
