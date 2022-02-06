@@ -9,6 +9,7 @@ html, #formBody { background-color:WhiteSmoke; padding-top: 5px;}
 .modal-title{padding: 5px 15px 0px 15px;}
 #secretIdErrMsg, #siteKeyDelValue, #siteKeyErrMsg{color:red;}
 #noshow{visibility:hidden;}
+.hide{display:none;}
 .cyaHeader{font-size:large;color:blue; margin-left:10px;}
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
