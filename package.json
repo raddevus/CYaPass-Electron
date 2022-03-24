@@ -29,7 +29,7 @@
     "bootstrap": "^4.5.2",
     "dot-prop": ">=4.2.1",
     "jquery": "^3.5.1",
-    "minimist": "^1.2.5"
+    "minimist": "^1.2.6"
   },
   "build": {
     "appId": "com.cyapass.CYaPass",
