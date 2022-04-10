@@ -22,6 +22,10 @@ let isImport = false;
 var allSiteKeys = [];
 var isAddKey = true;
 
+let doBaseUrl = "http://104.131.78.41/";  // DigitalOcean
+let nlBaseUrl = "https://NewLibre.com/LibreStore/";  // NewLibre
+let localBaseUrl = "http://localhost:5243/"			 // LocalHost
+
 
 function generatePassword(){
     var selectedItemText = document.querySelector("#SiteListBox option:checked").value;
@@ -241,8 +245,9 @@ function decryptSiteKeys(){
 
 function importSiteKeys(secretId){
 	
-	//let url = "http://localhost:5243/Cya/GetData?key="+secretId;
-	let url = "http://NewLibre.com/LibreStore/Cya/GetData?key="+secretId;
+	// let url = localBaseUrl + "Cya/GetData?key=" + secretId;
+	// let url = nlBaseUrl + "Cya/GetData?key=" + secretId;
+	let url = nlBaseUrl + "Cya/GetData?key=" + secretId;
 	fetch(url, {
 		method: 'GET',
 		})
@@ -290,8 +295,9 @@ function exportSiteKeys(encryptedData, secretId){
 	formDataX.append("key",secretId);
 	formDataX.append("data",encryptedData);
 
-	//let url = "http://localhost:5243/Cya/SaveData";
-	let url = "http://NewLibre.com/LibreStore/Cya/SaveData";
+	// let url = "http://localhost:5243/Cya/SaveData";
+	// let url = nlBaseUrl + "Cya/SaveData";
+	let url = nlBaseUrl + "Cya/SaveData";
 	fetch(url, {
 		method: 'POST',
 		redirect: 'follow',
