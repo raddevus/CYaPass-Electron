@@ -25,7 +25,7 @@ var isAddKey = true;
 let doBaseUrl = "http://104.131.78.41/";  // DigitalOcean
 let nlBaseUrl = "https://NewLibre.com/LibreStore/";  // NewLibre
 let localBaseUrl = "http://localhost:5243/"			 // LocalHost
-
+let transferUrl = null;
 
 function generatePassword(){
     var selectedItemText = document.querySelector("#SiteListBox option:checked").value;
@@ -247,7 +247,7 @@ function importSiteKeys(secretId){
 	
 	// let url = localBaseUrl + "Cya/GetData?key=" + secretId;
 	// let url = nlBaseUrl + "Cya/GetData?key=" + secretId;
-	let url = nlBaseUrl + "Cya/GetData?key=" + secretId;
+	let url = transferUrl + "Cya/GetData?key=" + secretId;
 	fetch(url, {
 		method: 'GET',
 		})
@@ -297,7 +297,7 @@ function exportSiteKeys(encryptedData, secretId){
 
 	// let url = "http://localhost:5243/Cya/SaveData";
 	// let url = nlBaseUrl + "Cya/SaveData";
-	let url = nlBaseUrl + "Cya/SaveData";
+	let url = transferUrl + "Cya/SaveData";
 	fetch(url, {
 		method: 'POST',
 		redirect: 'follow',
@@ -305,7 +305,6 @@ function exportSiteKeys(encryptedData, secretId){
 		})
 		.then(response => response.json())
 		.then(data => console.log(data));
-
 }
 
 function importAlert(keyCount) {
@@ -314,6 +313,32 @@ function importAlert(keyCount) {
 	setInterval(() => {
 		document.querySelector('.alert').style.display='none';
 	}, 10000);
+}
+
+function okTransferHandler(){
+	let url = document.querySelector("#transferUrlText").value;
+	setTransferUrl(url);
+	$("#SetTransferUrlModal").modal('toggle');
+}
+
+function transferUrlButtonHandler(){
+	document.querySelector("#transferUrlText").value = transferUrl;
+	$("#SetTransferUrlModal").modal('toggle');
+}
+
+function setDefaultUrl(){
+	document.querySelector("#transferUrlText").value = nlBaseUrl;
+}
+
+function setTransferUrl(url){
+	transferUrl = localStorage.getItem("transferUrl");
+	if (transferUrl == null){
+		transferUrl = nlBaseUrl; // defaults to NewLibre.com LibreStore
+	}
+	if (url != null){
+		transferUrl = url;
+	}
+	localStorage.setItem("transferUrl",transferUrl);
 }
 
 function exportButtonHandler(){
@@ -550,6 +575,7 @@ function initApp(){
 	document.querySelector("#OKDeleteButton").addEventListener("click",deleteSiteKey);
 	document.querySelector("#AddSiteKeyModal").addEventListener("keypress",handleEnterKey);
 	document.querySelector("#OKExportButton").addEventListener("click",okExportHandler)
+	document.querySelector("#OKTransferButton").addEventListener("click",okTransferHandler)
 	$("#AddSiteKeyModal").on("shown.bs.modal", function () {
 		document.querySelector("#SiteKeyItem").focus();
 	});
@@ -574,6 +600,7 @@ function initApp(){
 	siteListBoxChangeHandler();
 	sortSiteKeys();
 	updateDetails();
+	setTransferUrl(null);
 	ipc.send('getAppPath',null);
 }
 

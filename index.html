@@ -44,6 +44,7 @@
       <div class="topPad bottomPad">
         <button type="button" class="btn btn-sm btn-outline-primary" onclick="exportButtonHandler()">Export SiteKeys</button>
         <button type="button" class="btn btn-sm btn-outline-primary" onclick="importButtonHandler()">Import SiteKeys</button>
+        <button type="button" class="btn btn-sm btn-outline-primary" onclick="transferUrlButtonHandler()">Set Transfer URL</button>
        </div>
     </form>
    </div>
@@ -154,6 +155,29 @@ f        <input class="form-control" type="text" id="SiteKeyItem" autofocus plac
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-outline-primary btn-submit" data-dismiss="modal">Cancel</button>
         <button id="OKExportButton" type="button" class="btn btn-sm btn-primary">OK</button>
+      </div>
+    </div>
+  </div>
+ </div>
+
+ <div class="modal fade" id="SetTransferUrlModal" tabindex="2" role="dialog" aria-labelledby="TransferLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-title">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="TransferLabel">Set Transfer URL</h4>
+      </div>
+      <div class="modal-body">
+        <div class="input-group mb-3">
+          <input id="transferUrlText" type="text" class="form-control" placeholder="Transfer URL" aria-label="transferUrlText" aria-describedby="setDefaultUrlButton">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" onclick="setDefaultUrl()" type="button" id="setDefaultUrlButton">Set Default</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-outline-primary btn-submit" data-dismiss="modal">Cancel</button>
+        <button id="OKTransferButton" type="button" class="btn btn-sm btn-primary">OK</button>
       </div>
     </div>
   </div>
