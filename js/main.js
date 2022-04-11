@@ -9,7 +9,7 @@ let mainWindow
 function createWindow () {
     // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 800,
+    width: 820,
     height: 600,
     icon: __dirname + '/CYaPass.png',
     title:app.name + " : v" + app.getVersion(),
