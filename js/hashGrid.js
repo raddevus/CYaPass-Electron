@@ -171,7 +171,7 @@ function ComputeHashBytes(textBasedPassword){
 	if (us.PointValue > 0){
 		pwdBuffer = Crypto.createHash("sha256").update(us.PointValue.toString() + textBasedPassword).digest();
 		hashValue = pwdBuffer.toString("hex");
-        console.log(hashValue);
+        console.log(`hashValue : ${hashValue}`);
 	}
 	else{
 		pwdBuffer = Crypto.createHash("sha256").update(textBasedPassword).digest();
