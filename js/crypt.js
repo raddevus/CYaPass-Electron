@@ -6,14 +6,18 @@ let isEncrypting = true;
 let decryptionIsSuccess = true;
 const DECRYPTION_ERROR_MSG = "ERROR!: Most likely you are using an incorrect pattern / password to decrypt the file with.";
 
-function encryptDataBuffer(data){
+function encryptDataBuffer(data,encryptedDataDTO){
     console.log("pwd : " + pwd);
     const key = pwdBuffer;//Crypto.createHash("sha256").update(localPwd).digest();
     const iv = Buffer.allocUnsafe(16);
-    // copies only 16 bytes of the key into iv
-    key.copy(iv);
 
+    // Using proper method of generating iv (based on radnom string)
+    Crypto.randomBytes(16).copy(iv);
+    console.log(`iv.length ${iv.length}`);
     console.log(iv);
+
+    // save the 16 bytes of the iv as a base64 string
+    encryptedDataDTO.iv = iv.toString("base64");
     cipher = Crypto.createCipheriv("aes-256-cbc", key,iv);
     // 1. encrypt the byes (call final())
     // 2. return base64 of encrypted bytes
@@ -37,16 +41,17 @@ function convertByteDataToString(data){
 function decryptDataBuffer(data){
     console.log("pwd : " + pwd);
     const key = pwdBuffer;
-    const iv = Buffer.allocUnsafe(16);
-    // copies only 16 bytes of the key into iv
-    key.copy(iv);
+    console.log(data.iv);
+
+    // 2022-06-25 fixing iv which is now passed in
+    const iv = Buffer.from(data.iv,"base64");
     var msg = [];
     console.log(iv);
     cipher = Crypto.createDecipheriv("aes-256-cbc", key, iv);
     // 1. encrypt the byes (call final())
     // 2. return base64 of encrypted bytes
-    msg.push(cipher.update(data, "base64", "binary"));//, "hex", "binary");
-    //console.log(data);
+    msg.push(cipher.update(data.data, "base64", "binary"));//, "hex", "binary");
+    
     try{
         msg.push(cipher.final("binary"));
     }

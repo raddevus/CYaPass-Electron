@@ -239,10 +239,6 @@ function okExportHandler(){
 	}
 }
 
-function decryptSiteKeys(){
-	decryptDataBuffer()
-}
-
 function importSiteKeys(secretId){
 	
 	// let url = localBaseUrl + "Cya/GetData?key=" + secretId;
@@ -254,7 +250,8 @@ function importSiteKeys(secretId){
 		.then(response => response.json())
 		.then(data => {
 			if (data.success == true){
-				let siteKeys = JSON.parse(decryptDataBuffer(data.cyabucket.data));
+				// now have to parse the data when sending it in to decryptDataBuffer
+				let siteKeys = JSON.parse(decryptDataBuffer(JSON.parse(data.cyabucket.data)));
 				// alert(siteKeys);
 				let addKeyCount = saveOnlyNewSiteKeys(siteKeys);
 				importAlert(addKeyCount);
@@ -285,16 +282,22 @@ function saveOnlyNewSiteKeys(newSiteKeys){
 function encryptSiteKeys(){
 	let siteKeysAsString = localStorage.getItem("siteKeys");
 	//console.log(`siteKeysAsString : ${siteKeysAsString}`);
-	let encrypted = encryptDataBuffer(siteKeysAsString);
-	return encrypted;
+	let encryptedDataDTO = {};
+	let encrypted = encryptDataBuffer(siteKeysAsString, encryptedDataDTO);
+	encryptedDataDTO.data = encrypted;
+	// return the stringified object for sending to the WebAPI
+	return JSON.stringify(encryptedDataDTO);
 }
 
-function exportSiteKeys(encryptedData, secretId){
+function exportSiteKeys(encryptedDataDTO, secretId){
 
 	const formDataX = new FormData();
 	formDataX.append("key",secretId);
-	formDataX.append("data",encryptedData);
-
+	formDataX.append("data",encryptedDataDTO);
+	//console.log(`encryptedDataDTO.iv ${encryptedDataDTO.iv}`);
+	//console.log(`encryptedDataDTO.data ${encryptedDataDTO.data}`);
+	console.log(encryptedDataDTO);
+	return;
 	// let url = "http://localhost:5243/Cya/SaveData";
 	// let url = nlBaseUrl + "Cya/SaveData";
 	let url = transferUrl + "Cya/SaveData";
