@@ -250,6 +250,21 @@ function importSiteKeys(secretId){
 		.then(response => response.json())
 		.then(data => {
 			if (data.success == true){
+				let encryptedData = JSON.parse(data.cyabucket.data);
+				let originalHmac = encryptedData.hmac;
+				// remove the hmac item -- can't use it when we gen hmac again
+				delete encryptedData.hmac;
+				console.log(`originalHmac: ${originalHmac}`);
+				let stringifiedData = JSON.stringify(encryptedData);
+				console.log(`stringifiedData ${stringifiedData}`);
+				let currentHmac = generateHmac(stringifiedData);
+				console.log(`currentHmac: ${currentHmac}`);
+				// first thing, validate the data with Hmac
+				if (currentHmac != originalHmac){
+					// this would mean the data is altered / corrupted
+					alert("It seems the original data has been corrupted!\nCannot import.")
+					return;
+				}
 				// now have to parse the data when sending it in to decryptDataBuffer
 				let siteKeys = JSON.parse(decryptDataBuffer(JSON.parse(data.cyabucket.data)));
 				// alert(siteKeys);
@@ -283,8 +298,11 @@ function encryptSiteKeys(){
 	let siteKeysAsString = localStorage.getItem("siteKeys");
 	//console.log(`siteKeysAsString : ${siteKeysAsString}`);
 	let encryptedDataDTO = {};
+	// empty string as a placeholder, simply to keep hmac as first item
+	encryptedDataDTO.hmac = "";
 	let encrypted = encryptDataBuffer(siteKeysAsString, encryptedDataDTO);
 	encryptedDataDTO.data = encrypted;
+	encryptedDataDTO.hmac = generateHmac(encrypted);
 	// return the stringified object for sending to the WebAPI
 	return JSON.stringify(encryptedDataDTO);
 }
@@ -297,7 +315,7 @@ function exportSiteKeys(encryptedDataDTO, secretId){
 	//console.log(`encryptedDataDTO.iv ${encryptedDataDTO.iv}`);
 	//console.log(`encryptedDataDTO.data ${encryptedDataDTO.data}`);
 	console.log(encryptedDataDTO);
-	return;
+
 	// let url = "http://localhost:5243/Cya/SaveData";
 	// let url = nlBaseUrl + "Cya/SaveData";
 	let url = transferUrl + "Cya/SaveData";

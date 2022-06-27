@@ -1,4 +1,3 @@
-
 var fs = require('fs');
 let key = "";
 let iv = "";
@@ -61,6 +60,15 @@ function decryptDataBuffer(data){
         return;
     }
     return msg.join("");
+}
+
+function generateHmac(encryptedDTO){
+
+    //NOTE: encryptedDTO must be the stringified object
+    console.log(pwdBuffer);
+    return Crypto.createHmac('sha256', pwdBuffer)
+                .update(encryptedDTO)
+                .digest('hex');
 }
 
 function encryptFile(){
