@@ -5,18 +5,20 @@ let isEncrypting = true;
 let decryptionIsSuccess = true;
 const DECRYPTION_ERROR_MSG = "ERROR!: Most likely you are using an incorrect pattern / password to decrypt the file with.";
 
-function encryptDataBuffer(data,encryptedDataDTO){
+function encryptDataBuffer(data, iv_out){
     console.log("pwd : " + pwd);
-    const key = pwdBuffer;//Crypto.createHash("sha256").update(localPwd).digest();
+    const key = pwdBuffer;
     const iv = Buffer.allocUnsafe(16);
 
     // Using proper method of generating iv (based on radnom string)
     Crypto.randomBytes(16).copy(iv);
     console.log(`iv.length ${iv.length}`);
     console.log(iv);
+    iv_out.value = iv.toString("hex");
+    console.log(`iv_out : ${iv_out}`);
 
     // save the 16 bytes of the iv as a base64 string
-    encryptedDataDTO.iv = iv.toString("base64");
+    //iv = iv.toString("base64");
     cipher = Crypto.createCipheriv("aes-256-cbc", key,iv);
     // 1. encrypt the byes (call final())
     // 2. return base64 of encrypted bytes
@@ -62,12 +64,12 @@ function decryptDataBuffer(data){
     return msg.join("");
 }
 
-function generateHmac(encryptedDTO){
-
+function generateHmac(encryptedData){
+    // format of data is iv:encryptedData
     //NOTE: encryptedDTO must be the stringified object
     console.log(pwdBuffer);
     return Crypto.createHmac('sha256', pwdBuffer)
-                .update(encryptedDTO)
+                .update(`${iv}:${encryptedData}`)
                 .digest('hex');
 }
 

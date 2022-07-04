@@ -26,6 +26,7 @@ let doBaseUrl = "http://104.131.78.41/";  // DigitalOcean
 let nlBaseUrl = "https://NewLibre.com/LibreStore/";  // NewLibre
 let localBaseUrl = "http://localhost:5243/"			 // LocalHost
 let transferUrl = null;
+let iv_out = {};
 
 function generatePassword(){
     var selectedItemText = document.querySelector("#SiteListBox option:checked").value;
@@ -297,28 +298,30 @@ function saveOnlyNewSiteKeys(newSiteKeys){
 function encryptSiteKeys(){
 	let siteKeysAsString = localStorage.getItem("siteKeys");
 	//console.log(`siteKeysAsString : ${siteKeysAsString}`);
-	let encryptedDataDTO = {};
-	// empty string as a placeholder, simply to keep hmac as first item
-	encryptedDataDTO.hmac = "";
-	let encrypted = encryptDataBuffer(siteKeysAsString, encryptedDataDTO);
-	encryptedDataDTO.data = encrypted;
-	encryptedDataDTO.hmac = generateHmac(encrypted);
+
+	let encrypted = encryptDataBuffer(siteKeysAsString,iv_out);
+	
 	// return the stringified object for sending to the WebAPI
-	return JSON.stringify(encryptedDataDTO);
+	return encrypted;
 }
 
-function exportSiteKeys(encryptedDataDTO, secretId){
+function exportSiteKeys(encryptedData, secretId){
 
 	const formDataX = new FormData();
 	formDataX.append("key",secretId);
-	formDataX.append("data",encryptedDataDTO);
+	formDataX.append("data",encryptedData);
+	formDataX.append("hmac",generateHmac(encryptedData));
+	formDataX.append("iv",iv_out.value);
 	//console.log(`encryptedDataDTO.iv ${encryptedDataDTO.iv}`);
 	//console.log(`encryptedDataDTO.data ${encryptedDataDTO.data}`);
-	console.log(encryptedDataDTO);
+	//console.log(encryptedData);
+	console.log(`iv : ${iv_out.value}`);
 
 	// let url = "http://localhost:5243/Cya/SaveData";
 	// let url = nlBaseUrl + "Cya/SaveData";
+	
 	let url = transferUrl + "Cya/SaveData";
+	console.log(`url: ${url}`);
 	fetch(url, {
 		method: 'POST',
 		redirect: 'follow',
