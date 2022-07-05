@@ -251,23 +251,20 @@ function importSiteKeys(secretId){
 		.then(response => response.json())
 		.then(data => {
 			if (data.success == true){
-				let encryptedData = JSON.parse(data.cyabucket.data);
-				let originalHmac = encryptedData.hmac;
-				// remove the hmac item -- can't use it when we gen hmac again
-				delete encryptedData.hmac;
-				console.log(`originalHmac: ${originalHmac}`);
-				let stringifiedData = JSON.stringify(encryptedData);
-				console.log(`stringifiedData ${stringifiedData}`);
-				let currentHmac = generateHmac(stringifiedData);
+				let encryptedData = data.cyabucket.data;
+				let originalHmac = data.cyabucket.hmac;
+				let bucket_iv = data.cyabucket.iv;
+				console.log(`originalHmac: ${originalHmac} bucket_iv : ${bucket_iv}`);
+				let currentHmac = generateHmac(encryptedData,bucket_iv);
 				console.log(`currentHmac: ${currentHmac}`);
 				// first thing, validate the data with Hmac
 				if (currentHmac != originalHmac){
 					// this would mean the data is altered / corrupted
-					alert("It seems the original data has been corrupted!\nCannot import.")
+					alert("Oiginal MAC doesn't match!\nEither the data has been corrupted or you're using an incorrect password.\nCannot import.");
 					return;
 				}
 				// now have to parse the data when sending it in to decryptDataBuffer
-				let siteKeys = JSON.parse(decryptDataBuffer(JSON.parse(data.cyabucket.data)));
+				let siteKeys = JSON.parse(decryptDataBuffer(encryptedData,bucket_iv));
 				// alert(siteKeys);
 				let addKeyCount = saveOnlyNewSiteKeys(siteKeys);
 				importAlert(addKeyCount);
@@ -301,7 +298,7 @@ function encryptSiteKeys(){
 
 	let encrypted = encryptDataBuffer(siteKeysAsString,iv_out);
 	
-	// return the stringified object for sending to the WebAPI
+	// return the encrypted bytes, which are base64 encoded
 	return encrypted;
 }
 
@@ -310,15 +307,10 @@ function exportSiteKeys(encryptedData, secretId){
 	const formDataX = new FormData();
 	formDataX.append("key",secretId);
 	formDataX.append("data",encryptedData);
-	formDataX.append("hmac",generateHmac(encryptedData));
+	formDataX.append("hmac",generateHmac(encryptedData,iv_out.value));
 	formDataX.append("iv",iv_out.value);
-	//console.log(`encryptedDataDTO.iv ${encryptedDataDTO.iv}`);
-	//console.log(`encryptedDataDTO.data ${encryptedDataDTO.data}`);
-	//console.log(encryptedData);
-	console.log(`iv : ${iv_out.value}`);
 
-	// let url = "http://localhost:5243/Cya/SaveData";
-	// let url = nlBaseUrl + "Cya/SaveData";
+	console.log(`iv : ${iv_out.value}`);
 	
 	let url = transferUrl + "Cya/SaveData";
 	console.log(`url: ${url}`);

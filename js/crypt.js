@@ -14,44 +14,36 @@ function encryptDataBuffer(data, iv_out){
     Crypto.randomBytes(16).copy(iv);
     console.log(`iv.length ${iv.length}`);
     console.log(iv);
+    // iv_out is an object which holds the String value of the 16 bytes as 32-char hex value
+    // each 2 hex values = 1 byte - iv_out is passed by ref & we use the iv value outside this JS file
     iv_out.value = iv.toString("hex");
     console.log(`iv_out : ${iv_out}`);
 
-    // save the 16 bytes of the iv as a base64 string
-    //iv = iv.toString("base64");
     cipher = Crypto.createCipheriv("aes-256-cbc", key,iv);
+    var msg = [];
     // 1. encrypt the byes (call final())
     // 2. return base64 of encrypted bytes
-    var x = convertByteDataToString(data);
-    console.log("x : " + x.length);
-    var msg = [];
     msg.push(cipher.update(data, "binary", "base64"));//, "binary", "hex");
     //console.log(data);
     msg.push(cipher.final("base64"));
     return msg.join("");
 }
 
-function convertByteDataToString(data){
-    var outString = "";
-    for (var i =0;i<data.length;i++){
-        outString += String.fromCharCode(data[i]);
-    }
-    return outString;
-}
-
-function decryptDataBuffer(data){
+function decryptDataBuffer(data,in_iv){
     console.log("pwd : " + pwd);
     const key = pwdBuffer;
-    console.log(data.iv);
+    console.log(`iv : ${in_iv}`);
 
     // 2022-06-25 fixing iv which is now passed in
-    const iv = Buffer.from(data.iv,"base64");
-    var msg = [];
+    //const iv = Buffer.from(iv,"base64");
+    const iv = Buffer.from(in_iv,"hex");
+    console.log("decryptDataBuffer() 1");
     console.log(iv);
+    var msg = [];
     cipher = Crypto.createDecipheriv("aes-256-cbc", key, iv);
     // 1. encrypt the byes (call final())
     // 2. return base64 of encrypted bytes
-    msg.push(cipher.update(data.data, "base64", "binary"));//, "hex", "binary");
+    msg.push(cipher.update(data, "base64", "binary"));//, "hex", "binary");
     
     try{
         msg.push(cipher.final("binary"));
@@ -64,58 +56,10 @@ function decryptDataBuffer(data){
     return msg.join("");
 }
 
-function generateHmac(encryptedData){
+function generateHmac(encryptedData, in_iv){
     // format of data is iv:encryptedData
-    //NOTE: encryptedDTO must be the stringified object
-    console.log(pwdBuffer);
-    return Crypto.createHmac('sha256', pwdBuffer)
-                .update(`${iv}:${encryptedData}`)
-                .digest('hex');
-}
-
-function encryptFile(){
-    isEncrypting = true;
-    if (pwd != ""){
-        createOutputFileFromInputData();
-    }
-    else{
-        alert("Please create a pattern and/or add a password.");
-        document.querySelector("#textBasedPassword").focus();
-    }
-}
-
-function decryptFile(){
-    isEncrypting = false;
-    if (pwd != ""){
-        createOutputFileFromInputData();
-    }
-    else{
-        alert("Please create a pattern and/or add a password.");
-        document.querySelector("#textBasedPassword").focus();
-    }
-}
-
-function createOutputFileFromInputData(){
-    decryptionIsSuccess = true;
-    var currentSelectedFile = document.querySelector('#selected-file').innerHTML;
-    if (currentSelectedFile == null){
-        return;
-    }
-    alert("Processing file... " + currentSelectedFile);
     
-    fs.readFile(currentSelectedFile, function (err, data) {
-        if (err) return console.log(err);
-        console.log("read the file!");
-        
-        if (isEncrypting){
-            outputFileData = encryptDataBuffer(data);
-        }
-        else{
-            var base64Data = data.toString("utf8");
-            outputFileData = decryptDataBuffer(base64Data);
-        }
-        if (decryptionIsSuccess){
-            writeTargetFile(outputFileData, isEncrypting);
-        }
-    });
+    return Crypto.createHmac('sha256', pwdBuffer)
+                .update(`${in_iv}:${encryptedData}`)
+                .digest('hex');
 }
