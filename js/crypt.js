@@ -8,6 +8,7 @@ const DECRYPTION_ERROR_MSG = "ERROR!: Most likely you are using an incorrect pat
 function encryptDataBuffer(data, iv_out){
     console.log("pwd : " + pwd);
     const key = pwdBuffer;
+    console.log(`key : ${key}`);
     const iv = Buffer.allocUnsafe(16);
 
     // Using proper method of generating iv (based on radnom string)
@@ -59,7 +60,7 @@ function decryptDataBuffer(data,in_iv){
 function generateHmac(encryptedData, in_iv){
     // format of data is iv:encryptedData
     
-    return Crypto.createHmac('sha256', pwdBuffer)
+    return Crypto.createHmac('sha256', pwdBuffer.toString("hex"))
                 .update(`${in_iv}:${encryptedData}`)
                 .digest('hex');
 }
