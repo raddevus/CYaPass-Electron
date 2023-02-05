@@ -1,6 +1,6 @@
 {
   "name": "CYaPass",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Draw your password.\nNever type a password again.\nNever memorize a password again.\nNever make up a password again.",
   "main": "js/main.js",
   "scripts": {

@@ -625,7 +625,7 @@ function sortSiteKeys(){
 	var select = $('select');
 	select.html(select.find('option').sort(function(x, y) {
 	  // to change to descending order switch "<" for ">"
-	  return $(x).text() > $(y).text() ? 1 : -1;
+	  return $(x).text().toLowerCase() > $(y).text().toLowerCase() ? 1 : -1;
 	}));
 }
 
