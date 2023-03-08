@@ -325,7 +325,10 @@ function exportSiteKeys(encryptedData, secretId){
 		body: formDataX,
 		})
 		.then(response => response.json())
-		.then(data => console.log(data));
+		.then(() => {
+			let localKeys = JSON.parse(localStorage.getItem("siteKeys"));
+			alert(`Succesfully exported all ${localKeys.length} site-keys`);
+		})		
 }
 
 function importAlert(keyCount) {
