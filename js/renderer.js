@@ -278,6 +278,9 @@ function importSiteKeys(secretId){
 			else{
 				alert(data.message);
 			}
+		})
+		.catch( err => {
+			alert(`Error occurred. Could not IMPORT sitekeys\n${err}\nDo you have Internet access?\nPlease check the Transfer URL & try again.`);
 		});
 }
 
@@ -330,7 +333,7 @@ function exportSiteKeys(encryptedData, secretId){
 			alert(`Succesfully exported all ${localKeys.length} site-keys`);
 		})
 		.catch( err => {
-			alert(`Error occurred. Could not export sitekeys\n${err}\nPlease check the export URL & try again.`);
+			alert(`Error occurred. Could not export sitekeys\n${err}\nDo you have Internet access?\nPlease check the Transfer URL & try again.`);
 		})
 }
 
