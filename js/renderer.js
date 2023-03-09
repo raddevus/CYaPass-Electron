@@ -328,7 +328,10 @@ function exportSiteKeys(encryptedData, secretId){
 		.then(() => {
 			let localKeys = JSON.parse(localStorage.getItem("siteKeys"));
 			alert(`Succesfully exported all ${localKeys.length} site-keys`);
-		})		
+		})
+		.catch( err => {
+			alert(`Error occurred. Could not export sitekeys\n${err}\nPlease check the export URL & try again.`);
+		})
 }
 
 function importAlert(keyCount) {
