@@ -23,7 +23,7 @@
   "license": "CC0-4.0",
   "devDependencies": {
     "electron": "^22.2.0",
-    "electron-builder": "^23.6.0",
+    "electron-builder": "^24.0.0",
     "electron-toolkit": "^1.0.1"
   },
   "dependencies": {
