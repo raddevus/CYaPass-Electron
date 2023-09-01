@@ -5,10 +5,6 @@
   "main": "js/main.js",
   "scripts": {
     "start": "electron-forge start",
-    "electron-toolkit": "electron ./node_modules/electron-toolkit",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder",
-    "distMac": "electron-builder --mac --x64 ",
     "package": "electron-forge package",
     "make": "electron-forge make"
   },
@@ -30,8 +26,7 @@
     "@electron-forge/maker-squirrel": "^6.4.1",
     "@electron-forge/maker-zip": "^6.4.1",
     "@electron-forge/plugin-auto-unpack-natives": "^6.4.1",
-    "electron": "^26.1.0",
-    "electron-toolkit": "^1.0.1"
+    "electron": "^26.1.0"
   },
   "dependencies": {
     "bootstrap": "^4.5.2",
