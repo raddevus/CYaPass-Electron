@@ -33,7 +33,7 @@
     "dot-prop": ">=4.2.1",
     "electron-squirrel-startup": "^1.0.0",
     "jquery": "^3.5.1",
-    "minimist": "^1.2.5"
+    "minimist": "^1.2.8"
   },
   "build": {
     "appId": "com.cyapass.CYaPass",
