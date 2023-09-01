@@ -1,7 +1,7 @@
 {
   "name": "CYaPass",
   "version": "1.4.4",
-  "description": "Draw your password.\nNever type a password again.\nNever memorize a password again.\nNever make up a password again.",
+  "description": "Draw your password. Never type a password again. Never memorize a password again. Never make up a password again.",
   "main": "js/main.js",
   "scripts": {
     "start": "electron-forge start",
