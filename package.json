@@ -1,14 +1,16 @@
 {
   "name": "CYaPass",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Draw your password.\nNever type a password again.\nNever memorize a password again.\nNever make up a password again.",
   "main": "js/main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron-forge start",
     "electron-toolkit": "electron ./node_modules/electron-toolkit",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "distMac": "electron-builder --mac --x64 "
+    "distMac": "electron-builder --mac --x64 ",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "repository": "https://github.com/raddevus/CYaPass-Electron",
   "keywords": [
@@ -22,13 +24,19 @@
   "author": "roger deutsch",
   "license": "CC0-4.0",
   "devDependencies": {
-    "electron": "^22.2.0",
-    "electron-builder": "^24.0.0",
+    "@electron-forge/cli": "^6.4.1",
+    "@electron-forge/maker-deb": "^6.4.1",
+    "@electron-forge/maker-rpm": "^6.4.1",
+    "@electron-forge/maker-squirrel": "^6.4.1",
+    "@electron-forge/maker-zip": "^6.4.1",
+    "@electron-forge/plugin-auto-unpack-natives": "^6.4.1",
+    "electron": "^26.1.0",
     "electron-toolkit": "^1.0.1"
   },
   "dependencies": {
     "bootstrap": "^4.5.2",
     "dot-prop": ">=4.2.1",
+    "electron-squirrel-startup": "^1.0.0",
     "jquery": "^3.5.1",
     "minimist": "^1.2.5"
   },
