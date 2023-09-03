@@ -371,6 +371,17 @@ function setTransferUrl(url){
 	localStorage.setItem("transferUrl",transferUrl);
 }
 
+function removeAllSiteKeysButtonHandler(){
+	$("#RemoveAllSiteKeysModal").modal("toggle");
+
+}
+
+function removeAllSiteKeys(){
+	localStorage.removeItem("siteKeys");
+	$("#RemoveAllSiteKeysModal").modal("toggle");
+	initSiteKeys();
+}
+
 function exportButtonHandler(){
 	isImport = false;
 	let msg = `To insure your Site/Key Export is secure you must draw a password &amp; select a siteKey.<br/>

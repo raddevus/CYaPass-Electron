@@ -4,6 +4,7 @@ html, #formBody { background-color:WhiteSmoke; padding-top: 5px;}
 #SiteListBox{width:100%;}
 .topPad{margin-top: 7px;}
 .bottomPad{margin-bottom: 20px;}
+.buttonPad{margin: 3px 3px 3px 0px;}
 #SiteListButtons{margin-left:20px;}
 #addUpperCaseContainer{padding-top : 15px;}
 .modal-title{padding: 5px 15px 0px 15px;}
