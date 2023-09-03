@@ -14,7 +14,9 @@ module.exports = {
     },
     {
       name: '@electron-forge/maker-deb',
-      config: {},
+      config: {
+        "icon": "build/CYaPass.png" 
+      },
     },
     {
       name: '@electron-forge/maker-rpm',
