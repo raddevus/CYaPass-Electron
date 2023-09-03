@@ -668,6 +668,7 @@ function setLastSelectedSiteKey(){
 	}
 	// otherwise attempt to set the item to the last one the user selected.	
 	document.querySelector("#SiteListBox").value = atob(lastSelected);
+	siteListBoxChangeHandler();
 }
 
 function saveLastSelectedSiteKey(encodedSiteKey){
