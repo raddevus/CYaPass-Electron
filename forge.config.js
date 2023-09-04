@@ -11,6 +11,9 @@ module.exports = {
     {
       name: '@electron-forge/maker-zip',
       platforms: ['darwin'],
+      config: {
+        "icon":"build/icon.icns"
+      }
     },
     {
       name: '@electron-forge/maker-deb',
