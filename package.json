@@ -29,6 +29,7 @@
     "electron": "^26.1.0"
   },
   "dependencies": {
+    "@electron-forge/maker-dmg": "^6.4.1",
     "bootstrap": "^4.5.2",
     "dot-prop": ">=4.2.1",
     "electron-squirrel-startup": "^1.0.0",
