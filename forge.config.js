@@ -13,7 +13,7 @@ module.exports = {
       name: '@electron-forge/maker-zip',
       platforms: ['darwin'],
       config: {
-        "icon":"build/icon.icns"
+        "icon":"build/icon"
       }
     },
     {
