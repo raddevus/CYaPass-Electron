@@ -33,6 +33,12 @@ module.exports = {
       name: '@electron-forge/maker-rpm',
       config: {},
     },
+    // {
+      // ### LEAVING THIS COMMENTED OUT, UNTIL I FIND A SOLUTION
+    //   name: '@electron-forge/maker-snap',
+    //   config:{}
+
+    // },
   ],
   plugins: [
     {

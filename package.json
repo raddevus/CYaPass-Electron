@@ -1,9 +1,9 @@
 {
   "name": "CYaPass",
   "version": "1.4.4",
-  "description": "Draw your password. Never type a password again. Never memorize a password again. Never make up a password again.",
+  "description": "Never type a password again. And, never memorize or make up a password again.",
   "main": "js/main.js",
-  "scripts": {
+    "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make"
@@ -25,34 +25,17 @@
     "@electron-forge/maker-rpm": "^6.4.1",
     "@electron-forge/maker-squirrel": "^6.4.1",
     "@electron-forge/maker-zip": "^6.4.1",
+    "@electron-forge/maker-snap": "^6.4.1",
     "@electron-forge/plugin-auto-unpack-natives": "^6.4.1",
     "electron": "^26.1.0"
   },
   "dependencies": {
     "@electron-forge/maker-dmg": "^6.4.1",
+    "@electron-forge/maker-snap": "^6.4.1",
     "bootstrap": "^4.5.2",
     "dot-prop": ">=4.2.1",
     "electron-squirrel-startup": "^1.0.0",
     "jquery": "^3.5.1",
     "minimist": "^1.2.8"
-  },
-  "build": {
-    "appId": "com.cyapass.CYaPass",
-    "copyright": "Copyright © 2022 roger deutsch",
-    "productName": "CYaPass",
-    "electronVersion": "16.0.7",
-    "asar": true,
-    "directories": {
-      "output": "dist",
-      "buildResources": "build"
-    },
-    "linux": {
-      "category": "Utility.Passwords",
-      "icon": "CYaPass.png",
-      "executableName": "cyapass"
-    },
-    "win": {
-      "icon": "build/CYaPass512.png"
-    }
   }
 }
