@@ -1,3 +1,4 @@
+
 const ipc = require('electron').ipcRenderer
 
 // This file is required by the index.html file and will
@@ -7,6 +8,7 @@ const ipc = require('electron').ipcRenderer
 "use strict";
 let $ = require('jquery');
 var modal = require('./node_modules/bootstrap/js/dist/modal');
+
 window.$ = $;
 
 //let bs = require('bootstrap');
@@ -33,6 +35,8 @@ let iv_out = {};
 // each one to localStorage("lastSelectedKey");
 let isInit = true;
 
+let multiHashSettings;
+
 function generatePassword(){
     var selectedItemText = document.querySelector("#SiteListBox option:checked").value;
 
@@ -43,7 +47,19 @@ function generatePassword(){
 	{
 		return;
 	}
+	
 	ComputeHashBytes(selectedItemText);
+	console.log(`PASSWORD 1 ====> ${pwd}`);
+	
+	if (multiHashSettings.multiHashIsOn){
+		var hashLoopCount = 0;
+		while (hashLoopCount < multiHashSettings.multiHashCount){
+			ComputeHashBytes(pwd);
+			console.log(`PASSWORD --> ${pwd}`);
+			hashLoopCount++;
+		}
+	}
+	
 	console.log("ComputeHashBytes() : " + pwd);
 	addUppercaseLetter();
 	console.log ("pwd 1: " + pwd);
@@ -89,6 +105,20 @@ function siteListBoxChangeHandler(){
 		saveLastSelectedSiteKey(getEncodedKey(itemKey));
 	}
 	generatePassword();
+}
+
+function multiHashChangeHandler(){
+	let multiHashIsOn = document.querySelector("#multiHashIsOnCheckbox").checked;
+	let multiHashCount = parseInt(document.querySelector("#multiHash").value);
+	multiHashSettings = new MultiHash(multiHashIsOn, multiHashCount)
+	saveMultiHashToLocalStorage(multiHashSettings);
+	generatePassword();
+}
+
+function initMultiHashValues(){
+	multiHashSettings = getMultiHashFromLocalStorage();
+	document.querySelector("#multiHashIsOnCheckbox").checked = multiHashSettings.multiHashIsOn;
+	document.querySelector("#multiHash").value = multiHashSettings.multiHashCount;
 }
 
 function getExistingSiteKey(encodedKey){
@@ -530,6 +560,15 @@ function saveToLocalStorage()
   
 }
 
+function saveMultiHashToLocalStorage(multiHashObj){
+	localStorage.setItem("multiHash", JSON.stringify(multiHashObj))
+}
+
+function getMultiHashFromLocalStorage(){
+	let hash = JSON.parse(localStorage.getItem("multiHash"));
+	return new MultiHash(hash.multiHashIsOn, hash.multiHashCount);
+}
+
 function deleteItemFromLocalStorage(encodedKey){
 	console.log("Removing : " + encodedKey);
 	for (var i =0; i < allSiteKeys.length;i++){
@@ -632,6 +671,8 @@ function initApp(){
 	document.querySelector("#specialChars").addEventListener('input', generatePassword);
 	document.querySelector("#maxLength").addEventListener('input', generatePassword);
 	document.querySelector("#maxLengthCheckBox").addEventListener('change', generatePassword);
+	document.querySelector("#multiHash").addEventListener('change', multiHashChangeHandler);
+	document.querySelector("#multiHashIsOnCheckbox").addEventListener('change', multiHashChangeHandler);
 	
 	document.querySelector("#passwordText").classList.remove("noselect");
 
@@ -643,6 +684,8 @@ function initApp(){
 	updateDetails();
 	setTransferUrl(null);
 	ipc.send('getAppPath',null);
+
+	initMultiHashValues();
 
 	// We set isInit to false so selected keys will be saved for user.
 	isInit = false;

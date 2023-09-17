@@ -24,19 +24,30 @@
       <button type="button" class="btn btn-sm btn-outline-primary" onclick="addButtonClick()">Add</button>
       <button type="button" class="btn btn-sm btn-outline-primary" onclick="editButtonClick()">Edit</button>
       <button type="button" class="btn btn-sm btn-outline-primary" onclick="deleteButtonClick()">Delete</button>
+      <div class="row topPad">
+				<div class="col-lg-6" >
+				<input type="checkbox" id="multiHashIsOnCheckbox">
+				<label class="noselect" for="multiHashIsOnCheckbox"><strong>Use Multi-Hash</strong></label>
+					<input type="number" id="multiHash" name="multiHash" value="0" min="0" max="500" 
+					data-toggle="tooltip" data-placement="top" title="Allows you to provide another level of security by hashing your password multiple times."/>
+				</div>
+			</div>
      </div>
      
      <form class="form-inline">
        <div class="input-group">
-         <label class="input-group-addon"><input id="addUppercaseCheckBox" type="checkbox" value=""><strong> Add UpperCase</strong></label>
-         <label id="noshow" class="form-control" ></label>
+        <input id="addUppercaseCheckBox" type="checkbox" value=""> 
+        <label class="input-group-addon noselect leftPad" for="addUppercaseCheckBox"><strong>Add UpperCase</strong></label>
        </div>
        <div class="input-group">
-         <label class="input-group-addon"><input id="addSpecialCharsCheckBox" type="checkbox" value=""><strong> Add Special Chars</strong></label>
+        <input id="addSpecialCharsCheckBox" type="checkbox" value="">
+        <label class="input-group-addon noselect leftPad" for="addSpecialCharsCheckBox">
+          <strong>Add Special Chars</strong></label> 
          <input class="form-control" id="specialChars" placeholder="special chars">
        </div>
        <div class="input-group">
-         <label class="input-group-addon"><input id="maxLengthCheckBox" type="checkbox" value=""><strong> Max Length</strong></label>
+        <input id="maxLengthCheckBox" type="checkbox" value=""> 
+        <label class="input-group-addon noselect leftPad" for="maxLengthCheckBox"><strong> Max Length</strong></label>
          <input type = "number" max="64" min="0" class="form-control" id="maxLength" value="32">
        </div>
      </form>
@@ -232,5 +243,6 @@
 </body>
     <!-- You can also require other files to run in this process -->
     <script src="js/crypt.js"></script>
+    <script src="js/multiHash.js"></script>
     <script src="js/renderer.js"></script>
 </html>
