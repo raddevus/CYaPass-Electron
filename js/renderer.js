@@ -35,7 +35,7 @@ let iv_out = {};
 // each one to localStorage("lastSelectedKey");
 let isInit = true;
 
-let multiHashSettings;
+let multiHashSettings = null;
 
 function generatePassword(){
     var selectedItemText = document.querySelector("#SiteListBox option:checked").value;
@@ -117,7 +117,7 @@ function multiHashChangeHandler(){
 
 function initMultiHashValues(){
 	multiHashSettings = getMultiHashFromLocalStorage();
-	if (multiHashSettings == null){
+	if (multiHashSettings == undefined || multiHashSettings == null){
 		mutiHashSettings = new MultiHash(false, 0);
 		saveMultiHashToLocalStorage(multiHashSettings);
 	}
@@ -570,7 +570,7 @@ function saveMultiHashToLocalStorage(multiHashObj){
 
 function getMultiHashFromLocalStorage(){
 	let hash = JSON.parse(localStorage.getItem("multiHash"));
-	if (hash == null){
+	if (hash == undefined || hash == null){
 		hash = new MultiHash(false, 0);
 		saveMultiHashToLocalStorage(multiHashSettings);
 	}
