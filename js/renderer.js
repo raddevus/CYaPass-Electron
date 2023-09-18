@@ -117,6 +117,10 @@ function multiHashChangeHandler(){
 
 function initMultiHashValues(){
 	multiHashSettings = getMultiHashFromLocalStorage();
+	if (multiHashSettings == null){
+		mutiHashSettings = new MultiHash(false, 0);
+		saveMultiHashToLocalStorage(multiHashSettings);
+	}
 	document.querySelector("#multiHashIsOnCheckbox").checked = multiHashSettings.multiHashIsOn;
 	document.querySelector("#multiHash").value = multiHashSettings.multiHashCount;
 }
@@ -566,6 +570,10 @@ function saveMultiHashToLocalStorage(multiHashObj){
 
 function getMultiHashFromLocalStorage(){
 	let hash = JSON.parse(localStorage.getItem("multiHash"));
+	if (hash == null){
+		hash = new MultiHash(false, 0);
+		saveMultiHashToLocalStorage(multiHashSettings);
+	}
 	return new MultiHash(hash.multiHashIsOn, hash.multiHashCount);
 }
 
