@@ -27,7 +27,7 @@
     "@electron-forge/maker-zip": "^6.4.1",
     "@electron-forge/maker-snap": "^6.4.1",
     "@electron-forge/plugin-auto-unpack-natives": "^6.4.1",
-    "electron": "^26.1.0"
+    "electron": "^26.2.1"
   },
   "dependencies": {
     "@electron-forge/maker-dmg": "^6.4.1",
