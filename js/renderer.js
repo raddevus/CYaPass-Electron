@@ -117,7 +117,7 @@ function multiHashChangeHandler(){
 
 function initMultiHashValues(){
 	multiHashSettings = getMultiHashFromLocalStorage();
-	if (multiHashSettings == undefined || multiHashSettings == null){
+	if (multiHashSettings == undefined || multiHashSettings == null || multiHashSettings == 'undefined'){
 		mutiHashSettings = new MultiHash(false, 0);
 		saveMultiHashToLocalStorage(multiHashSettings);
 	}
@@ -570,7 +570,7 @@ function saveMultiHashToLocalStorage(multiHashObj){
 
 function getMultiHashFromLocalStorage(){
 	let hash = JSON.parse(localStorage.getItem("multiHash"));
-	if (hash == undefined || hash == null){
+	if (hash == undefined || hash == null || hash == 'undefined'){
 		hash = new MultiHash(false, 0);
 		saveMultiHashToLocalStorage(multiHashSettings);
 	}
