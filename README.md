@@ -13,4 +13,4 @@ You can try this app with three easy steps:
 You can build the installation packages (after you've cloned the repo) with:<br/>
 /&gt;npm run dist  -- <em>builds installation packages for your current OS</em>
 
-![first](https://i.stack.imgur.com/NvW1f.png)
+![first](https://i.stack.imgur.com/xr9qv.png)
