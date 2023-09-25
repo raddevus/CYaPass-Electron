@@ -413,7 +413,7 @@ function removeAllSiteKeysButtonHandler(){
 function removeAllSiteKeys(){
 	localStorage.removeItem("siteKeys");
 	$("#RemoveAllSiteKeysModal").modal("toggle");
-	initSiteKeys();
+	location.reload();
 }
 
 function exportButtonHandler(){
