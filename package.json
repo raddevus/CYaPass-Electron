@@ -29,7 +29,7 @@
     "@electron-forge/maker-snap": "^6.4.1",
     "@electron-forge/plugin-auto-unpack-natives": "^6.4.1",
     "electron": "^26.2.4",
-    "electron-builder": "^24.6.4",
+    "electron-builder": "^24.13.3",
     "electron-toolkit": "^1.0.2"
 
   },
