@@ -41,7 +41,9 @@
     "jquery": "^3.5.1",
     "lodash": "^4.17.21",
     "minimist": "^1.2.8",
-    "phin": "^3.7.1"
+    "phin": "^3.7.1",
+    "request": "^2.88.2",
+    "tough-cookie": "^4.1.3"
   },
   "build": {
     "appId": "com.cyapass.CYaPass",
