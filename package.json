@@ -1,9 +1,9 @@
 {
   "name": "CYaPass",
-  "version": "1.4.9",
+  "version": "1.4.10",
   "description": "Never type a password again. And, never memorize or make up a password again.",
   "main": "js/main.js",
-    "scripts": {
+  "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
@@ -24,14 +24,13 @@
     "@electron-forge/cli": "^6.4.1",
     "@electron-forge/maker-deb": "^6.4.1",
     "@electron-forge/maker-rpm": "^6.4.1",
+    "@electron-forge/maker-snap": "^6.4.1",
     "@electron-forge/maker-squirrel": "^6.4.1",
     "@electron-forge/maker-zip": "^6.4.1",
-    "@electron-forge/maker-snap": "^6.4.1",
     "@electron-forge/plugin-auto-unpack-natives": "^6.4.1",
     "electron": "^26.2.4",
     "electron-builder": "^24.13.3",
     "electron-toolkit": "^1.0.2"
-
   },
   "dependencies": {
     "@electron-forge/maker-dmg": "^6.4.1",
@@ -40,6 +39,7 @@
     "dot-prop": ">=4.2.1",
     "electron-squirrel-startup": "^1.0.0",
     "jquery": "^3.5.1",
+    "lodash": "^4.17.21",
     "minimist": "^1.2.8"
   },
   "build": {
