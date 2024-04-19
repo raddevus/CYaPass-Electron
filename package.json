@@ -40,7 +40,8 @@
     "electron-squirrel-startup": "^1.0.0",
     "jquery": "^3.5.1",
     "lodash": "^4.17.21",
-    "minimist": "^1.2.8"
+    "minimist": "^1.2.8",
+    "phin": "^3.7.1"
   },
   "build": {
     "appId": "com.cyapass.CYaPass",
