@@ -13,4 +13,6 @@ You can try this app with three easy steps:
 You can build the installation packages (after you've cloned the repo) with:<br/>
 /&gt;npm run dist  -- <em>builds installation packages for your current OS</em>
 
-![first](https://i.stack.imgur.com/xr9qv.png)
+
+![image](https://github.com/raddevus/CYaPass-Electron/assets/16722666/a1bd330f-72a6-4445-b895-eb37c4fbec1d)
+
