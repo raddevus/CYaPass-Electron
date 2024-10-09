@@ -18,7 +18,7 @@
     "type",
     "again"
   ],
-  "author": "roger deutsch",
+  "author": "Roger Deutsch <admin@cyapass.com> (https://cyapass.com/)",
   "license": "CC0-4.0",
   "devDependencies": {
     "@electron-forge/cli": "^6.4.1",
@@ -58,7 +58,8 @@
     "linux": {
       "category": "Utility.Passwords",
       "icon": "CYaPass.png",
-      "executableName": "cyapass"
+      "executableName": "cyapass",
+      "target": ["deb"]
     },
     "win": {
       "icon": "build/CYaPass512.png"
