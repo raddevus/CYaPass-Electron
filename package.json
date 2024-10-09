@@ -59,7 +59,7 @@
       "category": "Utility.Passwords",
       "icon": "CYaPass.png",
       "executableName": "cyapass",
-      "target": ["deb"]
+      "target": ["AppImage", "deb","rpm"]
     },
     "win": {
       "icon": "build/CYaPass512.png"
