@@ -57,12 +57,11 @@
     },
     "linux": {
       "category": "Utility.Passwords",
-      "icon": "CYaPass.png",
       "executableName": "cyapass",
       "target": ["AppImage", "deb","rpm"]
     },
     "win": {
-      "icon": "build/CYaPass512.png"
+      "icon": "build/CYaPass512x512.png"
     }
   }
 }
