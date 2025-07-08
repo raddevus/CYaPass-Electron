@@ -1,6 +1,6 @@
 {
   "name": "CYaPass",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Never type a password again. And, never memorize or make up a password again.",
   "main": "js/main.js",
   "scripts": {
@@ -73,7 +73,7 @@
     },
     "dmg": {
       "title": "${productName} ${version}",
-      "background": "build/CYaPass.png",
+      "background": "build/cloud_bgrd.jpg",
       "icon": "build/icon.icns",
       "contents": [
         {
