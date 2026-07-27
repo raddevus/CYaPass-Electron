@@ -1,6 +1,6 @@
 {
   "name": "CYaPass",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Never type a password again. And, never memorize or make up a password again.",
   "main": "js/main.js",
   "scripts": {
@@ -67,5 +67,9 @@
     "win": {
       "icon": "build/CYaPass512x512.png"
     }
+  },
+  "allowScripts": {
+    "electron@39.8.5": true,
+    "electron-winstaller@5.4.0": true
   }
 }

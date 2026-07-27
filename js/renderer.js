@@ -7,7 +7,7 @@ const ipc = require('electron').ipcRenderer
 // cyapass.js
 "use strict";
 let $ = require('jquery');
-var modal = require('./node_modules/bootstrap/js/dist/modal');
+//var modal = require('./node_modules/bootstrap/js/dist/modal');
 
 window.$ = $;
 
@@ -382,12 +382,25 @@ function importAlert(keyCount) {
 function okTransferHandler(){
 	let url = document.querySelector("#transferUrlText").value;
 	setTransferUrl(url);
-	$("#SetTransferUrlModal").modal('toggle');
 }
 
 function transferUrlButtonHandler(){
 	document.querySelector("#transferUrlText").value = transferUrl;
-	$("#SetTransferUrlModal").modal('toggle');
+   const myModalEl = document.querySelector("#SetTransferUrlModal");
+   // 2. Initialize the Bootstrap modal instance
+   const myModal = new bootstrap.Modal(myModalEl);
+
+   // 3. Show the dialog explicitly
+   myModal.show();
+   document.getElementById('OKTransferButton').addEventListener('click', () => {
+      const urlValue = document.getElementById('transferUrlText').value;
+  
+        // ... do your URL processing logic here ...
+        console.log("Saving URL:", urlValue);
+
+     // Manually close the modal now that we're done
+     myModal.hide(); 
+   });
 }
 
 function setDefaultUrl(){

@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/hashGrid.js"></script>
   </head>
   <body>
@@ -174,28 +175,34 @@
   </div>
  </div>
 
- <div class="modal fade" id="SetTransferUrlModal" tabindex="2" role="dialog" aria-labelledby="TransferLabel">
-  <div class="modal-dialog" role="document">
+  <div class="modal fade" id="SetTransferUrlModal" aria-labelledby="TransferLabel" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-title">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="TransferLabel">Set Transfer URL</h4>
+      
+      <!-- FIX 1: Changed modal-title wrapper to modal-header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="TransferLabel">Set Transfer URL</h5>
+        <!-- FIX 2: Modern Bootstrap 5 Close Button (uses data-bs-dismiss) -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      
       <div class="modal-body">
         <div class="input-group mb-3">
           <input id="transferUrlText" type="text" class="form-control" placeholder="Transfer URL" aria-label="transferUrlText" aria-describedby="setDefaultUrlButton">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" onclick="setDefaultUrl()" type="button" id="setDefaultUrlButton">Set Default</button>
-          </div>
+          <!-- FIX 3: Bootstrap 5 dropped input-group-append. Just put the button inside the input-group directly -->
+          <button class="btn btn-outline-secondary" onclick="setDefaultUrl()" type="button" id="setDefaultUrlButton">Set Default</button>
         </div>
       </div>
+      
       <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-outline-primary btn-submit" data-dismiss="modal">Cancel</button>
+        <!-- FIX 4: Changed data-dismiss to data-bs-dismiss -->
+        <button type="button" class="btn btn-sm btn-outline-primary btn-submit" data-bs-dismiss="modal">Cancel</button>
         <button id="OKTransferButton" type="button" class="btn btn-sm btn-primary">OK</button>
       </div>
+      
     </div>
   </div>
- </div>
+</div>
 
  <div class="modal fade" id="RemoveAllSiteKeysModal" tabindex="2" role="dialog" aria-labelledby="TransferLabel">
 	<div class="modal-dialog" role="document">
