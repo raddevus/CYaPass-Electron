@@ -88,54 +88,69 @@
   and Electron <span id="electron-version"></span>.
   <br/>App-Path : <span id="app-path"></span>
 </div>
-<div class="modal fade" id="AddSiteKeyModal" tabindex="-1" role="dialog" aria-labelledby="AddSiteKeyLabel">
- <div class="modal-dialog" role="document">
-   <div class="modal-content">
-     <div class="modal-title">
-       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-       <h4 class="modal-title" id="AddSiteKeyLabel">Add New Site/Key</h4>
-     </div>
-     <div class="modal-body">
-       <label for="SiteKeyItem">Site/Key</label> <span id="siteKeyErrMsg"></span>
-        <input class="form-control" type="text" id="SiteKeyItem" autofocus placeholder="Site/Key">
-     <div class="form-check" id="addUpperCaseContainer">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <input type="checkbox" id="addUppercaseCheckboxDlg">
-              </div>
-            </div>
-            <span class="form-control input-type-text">add uppercase</span>
+
+<!-- Removed tabindex to ensure text inputs and number inputs remain fully editable -->
+<div class="modal fade" id="AddSiteKeyModal" aria-labelledby="AddSiteKeyLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <!-- FIX 1: Changed modal-title wrapper to modal-header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="AddSiteKeyLabel">Add New Site/Key</h5>
+        <!-- FIX 2: Modernized Close Button -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body">
+        <!-- Main Input Group -->
+        <div class="mb-3">
+          <label for="SiteKeyItem" class="form-label">Site/Key</label> 
+          <span id="siteKeyErrMsg" class="text-danger small"></span>
+          <input class="form-control" type="text" id="SiteKeyItem" autofocus placeholder="Site/Key">
+        </div>
+        
+        <!-- FIX 3: Replaced clumsy input-groups with standard BS5 form check layouts -->
+        <div id="addUpperCaseContainer">
+          
+          <!-- Checkbox 1: Uppercase -->
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="addUppercaseCheckboxDlg">
+            <label class="form-check-label" for="addUppercaseCheckboxDlg">
+              Add uppercase
+            </label>
           </div>
           
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <input type="checkbox" id="addSpecialCharsCheckboxDlg">
-              </div>
-            </div>
-            <span class="form-control input-type-text" >add special char(s)</span>
+          <!-- Checkbox 2: Special Chars -->
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="addSpecialCharsCheckboxDlg">
+            <label class="form-check-label" for="addSpecialCharsCheckboxDlg">
+              Add special char(s)
+            </label>
           </div>
           
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <input type="checkbox" id="setMaxLengthCheckboxDlg" 
-                  value="32" >
-              </div>
+          <!-- Checkbox 3 with Number Input: Max Length -->
+          <!-- We keep input-group here because a checkbox and a number box sit side-by-side -->
+          <div class="input-group mb-3 align-items-center">
+            <div class="form-check me-3">
+              <input class="form-check-input" type="checkbox" id="setMaxLengthCheckboxDlg" value="32">
+              <label class="form-check-label" for="setMaxLengthCheckboxDlg">
+                Set max length
+              </label>
             </div>
-            <span class="form-control input-type-text" >set max length</span>
-            <input type="number" class="form-control input-type-text" id="maxLengthDlg" placeholder="max length"/>
+            <input type="number" class="form-control rounded" id="maxLengthDlg" placeholder="max length"/>
           </div>
-     </div>
-     
-     </div>
-     <div class="modal-footer">
-       <button type="button" class="btn btn-sm btn-outline-primary btn-submit" data-dismiss="modal">Cancel</button>
-       <button id="OKSiteKeyButton" type="button" class="btn btn-sm btn-primary">OK</button>
-     </div>
-   </div>
- </div>
+          
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <!-- FIX 4: Changed data-dismiss to data-bs-dismiss -->
+        <button type="button" class="btn btn-sm btn-outline-primary btn-submit" data-bs-dismiss="modal">Cancel</button>
+        <button id="OKSiteKeyButton" type="button" class="btn btn-sm btn-primary">OK</button>
+      </div>
+      
+    </div>
+  </div>
 </div>
 
 <div class="modal fade" id="DeleteSiteKeyModal" tabindex="-1" role="dialog" aria-labelledby="DeleteSiteKeyLabel">
@@ -156,24 +171,35 @@
  </div>
 </div>
 
-<div class="modal fade" id="ExportModal" tabindex="2" role="dialog" aria-labelledby="ExportLabel">
-  <div class="modal-dialog" role="document">
+<!-- Removed tabindex to ensure the input field remains focusable and editable -->
+<div class="modal fade" id="ExportModal" aria-labelledby="ExportLabel" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-title">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="ExportLabel">Export Encrypted Site/Keys</h4>
+      
+      <!-- FIX 1: Changed modal-title class wrapper to modal-header -->
+      <div class="modal-header">
+        <!-- FIX 2: Modernized title to an h5 element per BS5 standards -->
+        <h5 class="modal-title" id="ExportLabel">Export Encrypted Site/Keys</h5>
+        <!-- FIX 3: Replaced legacy "close" button and &times; span with standard BS5 close button -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      
       <div class="modal-body">
-        <label for="SiteKeyItem">CYa Secret ID</label> <span id="secretIdErrMsg"></span>
-         <input class="form-control" type="text" id="SecretId" autofocus placeholder="CYa Secret Id">
+        <!-- FIX 4: Corrected the "for" attribute to match the actual input's ID ("SecretId") -->
+        <label for="SecretId" class="form-label">CYa Secret ID</label>
+        <span id="secretIdErrMsg" class="text-danger small"></span>
+        <input class="form-control" type="text" id="SecretId" autofocus placeholder="CYa Secret Id">
       </div>
+      
       <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-outline-primary btn-submit" data-dismiss="modal">Cancel</button>
+        <!-- FIX 5: Changed data-dismiss to data-bs-dismiss -->
+        <button type="button" class="btn btn-sm btn-outline-primary btn-submit" data-bs-dismiss="modal">Cancel</button>
         <button id="OKExportButton" type="button" class="btn btn-sm btn-primary">OK</button>
       </div>
+      
     </div>
   </div>
- </div>
+</div>
 
   <div class="modal fade" id="SetTransferUrlModal" aria-labelledby="TransferLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -204,29 +230,36 @@
   </div>
 </div>
 
- <div class="modal fade" id="RemoveAllSiteKeysModal" tabindex="2" role="dialog" aria-labelledby="TransferLabel">
-	<div class="modal-dialog" role="document">
-	  <div class="modal-content">
-		<div class="modal-title">
-		  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		  <h4 class="modal-title" id="removeAllSiteKeys">Remove All SiteKeys</h4>
-		</div>
-		<div class="modal-body">
-		  <div class="input-group" >
-			<p>Please confirm that you want to Remove all SiteKeys from this computer by clicking the OK button.</p>
-			<p>Clicking OK will delete all the SiteKeys from your local computer (localStorage).  This option can be used 
-				if you are on a public computer and you'd like to insure your SiteKeys are not shared with anyone.
-			</p>
-			<p>However, if you do not want to remove the SiteKeys, please click the CANCEL button.</p>
-		  </div>
-		</div>
-		<div class="modal-footer">
-		  <button type="button" class="btn btn-sm btn-outline-primary btn-submit" data-dismiss="modal">Cancel</button>
-		  <button id="OkRemoveAllSiteKeysButton" onclick="removeAllSiteKeys()" type="button" class="btn btn-sm btn-primary">OK</button>
-		</div>
-	  </div>
-	</div>
-   </div>
+<!-- Removed tabindex to ensure clean DOM focus management -->
+<div class="modal fade" id="RemoveAllSiteKeysModal" aria-labelledby="removeAllSiteKeys" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <!-- FIX 1: Changed modal-title class wrapper to modal-header -->
+      <div class="modal-header">
+        <!-- FIX 2: Modernized title element and fixed aria-labelledby matching ID -->
+        <h5 class="modal-title" id="removeAllSiteKeys">Remove All SiteKeys</h5>
+        <!-- FIX 3: Replaced legacy "close" button layout with standard BS5 close button -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body">
+        <!-- FIX 4: Removed the input-group wrapper as it breaks standard paragraphs layout -->
+        <p>Please confirm that you want to Remove all SiteKeys from this computer by clicking the OK button.</p>
+        <p>Clicking OK will delete all the SiteKeys from your local computer (localStorage). This option can be used if you are on a public computer and you'd like to ensure your SiteKeys are not shared with anyone.</p>
+        <p class="mb-0">However, if you do not want to remove the SiteKeys, please click the CANCEL button.</p>
+      </div>
+      
+      <div class="modal-footer">
+        <!-- FIX 5: Changed data-dismiss to data-bs-dismiss -->
+        <button type="button" class="btn btn-sm btn-outline-primary btn-submit" data-bs-dismiss="modal">Cancel</button>
+        <!-- Retained your legacy onclick handler -->
+        <button id="OkRemoveAllSiteKeysButton" onclick="removeAllSiteKeys()" type="button" class="btn btn-sm btn-primary">OK</button>
+      </div>
+      
+    </div>
+  </div>
+</div>
 
  <div class="modal fade" tabindex="-1" id="ExportMsgModal" role="dialog">
   <div class="modal-dialog" role="document">

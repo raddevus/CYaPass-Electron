@@ -190,7 +190,13 @@ function addButtonClick(){
 	document.querySelector("#siteKeyErrMsg").innerHTML = "";
 	initAddDialogControlValues();
 	isAddKey = true;
-	$("#AddSiteKeyModal").modal('toggle');
+   
+   const myModalEl = document.querySelector("#AddSiteKeyModal");
+   // 2. Initialize the Bootstrap modal instance
+   const myModal = new bootstrap.Modal(myModalEl);
+
+   // 3. Show the dialog explicitly
+   myModal.show();
 	document.querySelector("#AddSiteKeyLabel").innerHTML = "Add New Site/Key";
 }
 
@@ -269,8 +275,13 @@ function okExportHandler(){
 	let secretId = document.querySelector("#SecretId").value;
 	document.querySelector("#secretIdErrMsg").innerHTML = "";
 	document.querySelector("#SecretId").value = "";
+   const myModalEl = document.querySelector("#ExportModal");
+   // 2. Initialize the Bootstrap modal instance
+   const myModal = new bootstrap.Modal(myModalEl);
+
+   // 3. Show the dialog explicitly
+   myModal.show();
 	
-	$("#ExportModal").modal('toggle');
 	if (isImport == undefined || isImport == false){
 		exportSiteKeys(encryptSiteKeys(),secretId);
 	}
@@ -392,8 +403,8 @@ function transferUrlButtonHandler(){
 
    // 3. Show the dialog explicitly
    myModal.show();
-   document.getElementById('OKTransferButton').addEventListener('click', () => {
-      const urlValue = document.getElementById('transferUrlText').value;
+   document.querySelector('#OKTransferButton').addEventListener('click', () => {
+      const urlValue = document.querySelector('#transferUrlText').value;
   
         // ... do your URL processing logic here ...
         console.log("Saving URL:", urlValue);
@@ -419,13 +430,22 @@ function setTransferUrl(url){
 }
 
 function removeAllSiteKeysButtonHandler(){
-	$("#RemoveAllSiteKeysModal").modal("toggle");
+
+   const myModalEl = document.querySelector("#RemoveAllSiteKeysModal");
+   // 2. Initialize the Bootstrap modal instance
+   const myModal = new bootstrap.Modal(myModalEl);
+
+   // 3. Show the dialog explicitly
+   myModal.show();
+   document.querySelector('#OkRemoveAllSiteKeysButton').addEventListener('click', () => {
+      removeAllSiteKeys();
+      myModal.hide();
+   });
 
 }
 
 function removeAllSiteKeys(){
 	localStorage.removeItem("siteKeys");
-	$("#RemoveAllSiteKeysModal").modal("toggle");
 	location.reload();
 }
 
@@ -438,10 +458,16 @@ function exportButtonHandler(){
 	if (pwd == ""){
 		
 		document.querySelector("#exportMainMsg").innerHTML = msg;
-		$("#ExportMsgModal").modal('toggle');
+      const myModalEl = document.querySelector("#ExportModal");
+      // 2. Initialize the Bootstrap modal instance
+      const myModal = new bootstrap.Modal(myModalEl);
+      myModal.show();
 		return;
 	}
-	$("#ExportModal").modal('toggle');
+      const myModalEl = document.querySelector("#ExportModal");
+      // 2. Initialize the Bootstrap modal instance
+      const myModal = new bootstrap.Modal(myModalEl);
+      myModal.show();
 }
 
 function importButtonHandler(){
@@ -453,10 +479,20 @@ function importButtonHandler(){
 	if (pwd == ""){
 		
 		document.querySelector("#exportMainMsg").innerHTML = msg;
-		$("#ExportMsgModal").modal("toggle");
+
+      const myModalEl = document.querySelector("#ExportModal");
+      // 2. Initialize the Bootstrap modal instance
+      const myModal = new bootstrap.Modal(myModalEl);
+
+      // 3. Show the dialog explicitly
+      myModal.show();
 		return;
 	}
-	$("#ExportModal").modal('toggle');
+
+      const myModalEl = document.querySelector("#ExportModal");
+      // 2. Initialize the Bootstrap modal instance
+      const myModal = new bootstrap.Modal(myModalEl);
+      myModal.show();
 }
 
 function loadSiteKeyList(item){
